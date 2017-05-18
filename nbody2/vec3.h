@@ -18,4 +18,5 @@ typedef double vec3 __attribute__((ext_vector_type(3)));
 #define vec3_J ((vec3){0,1,0})
 #define vec3_K ((vec3){0,0,1})
 
+
 #endif /* vec3_h */

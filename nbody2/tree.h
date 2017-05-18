@@ -24,13 +24,13 @@ struct _tree_node {
   vec3 max;
   vec3 min;
   
-  Body *bodies;
+  Body **bodies;
   uint nbodies;
   double mass;
   vec3 ctr_mass;
   
   uint capacity;
-  bool initialized
+  bool initialized;
 };
 
 void sum_mass(TreeNode *node);
