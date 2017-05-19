@@ -7,9 +7,14 @@
 //
 
 #include <stdio.h>
+#include <stdbool.h>
+#include "system.h"
+#include "types.h"
 
 int main(int argc, const char * argv[]) {
-  // insert code here...
-  printf("Hello, World!\n");
+  System s = {};
+  while (1) {
+    update_system(&s);
+  }
   return 0;
 }

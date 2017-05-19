@@ -13,26 +13,17 @@
 #include "vec3.h"
 #include "body.h"
 #include "config.h"
+#include "types.h"
 
 
-typedef struct _tree_node TreeNode;
 
-struct _tree_node {
-  struct _tree_node *nodes;
-  uint level;
-  vec3 divs;
-  vec3 max;
-  vec3 min;
-  
-  Body **bodies;
-  uint nbodies;
-  double mass;
-  vec3 ctr_mass;
-  
-  uint capacity;
-  bool initialized;
-};
 
 void sum_mass(TreeNode *node);
+
+bool should_open_node(TreeNode *node, vec3 pos);
+
+TreeNode build_tree(Body *bodies, uint count);
+
+void update_tree(TreeNode *node);
 
 #endif /* tree_h */

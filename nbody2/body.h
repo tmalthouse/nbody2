@@ -13,16 +13,13 @@
 #include <stdint.h>
 #include "vec3.h"
 #include "config.h"
+#include "types.h"
 
 
-typedef struct {
-  uint32_t id;
-  vec3 pos;
-  vec3 vel;
-  
-#ifndef UNIT_MASS
-  double mass;
-#endif
-} Body;
+
+uint64_t update_timestep (Body *b, uint64_t cur_time);
+
+void update_body (Body *b, uint64_t cur_time, TreeNode *tree);
+
 
 #endif /* body_h */

@@ -10,7 +10,7 @@
 #define config_h
 
 //Comment this out if you want bodies to have a mass != 1
-//#define UNIT_MASS
+#define UNIT_MASS
 
 //Change this if you want to use a different big G
 #ifdef UNIT_MASS
@@ -18,6 +18,18 @@
 #else
 #define BIG_G (6.67e-11)
 #endif
+
+//Softening factor
+#define EPSILON 0.005
+
+//Max timestep (in seconds.) Must be an integer, max 2^64 (so not a problem)
+#define T_MAX (31500000000u) //1,000 years
+
+#define TOL_PARAM (1.0)
+
+#define NODE_OPEN_PARAM (1.0)
+
+#define INITIAL_NODE_BUFFER (256)
 
 
 #endif /* config_h */

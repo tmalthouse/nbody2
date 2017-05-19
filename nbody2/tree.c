@@ -41,7 +41,7 @@ static vec3 max_point(Body *bodies, uint count) {
     if (fabs(pos.z)>max) max = pos.z;
   }
   
-  return (vec3){max,max,max};
+  return (vec3)(max);
 }
 
 static inline vec3 node_min_point(vec3 min, vec3 div, uint8_t index) {
@@ -62,7 +62,7 @@ static inline vec3 node_min_point(vec3 min, vec3 div, uint8_t index) {
 
 
 
-vec3 center_of_mass(TreeNode *node) {
+static inline vec3 center_of_mass(TreeNode *node) {
   vec3 cmass = vec3_0;
   
   for (uint i=0; i<node->nbodies; i++) {
@@ -119,8 +119,6 @@ static void update_node(TreeNode *node) {
 #endif
   }
   
-
-  
   //Then recurse, and repeat the procedure for all nodes with >1 particle
   for (uint i=0; i<8; i++) {
     //But first, calculate the centers of mass
@@ -132,6 +130,7 @@ static void update_node(TreeNode *node) {
   }
 }
 
+void update_tree(TreeNode *node) {update_node(node);}
 
 TreeNode build_tree(Body *bodies, uint count) {
   TreeNode node = {};
@@ -160,6 +159,20 @@ void free_node(TreeNode *node) {
   free(node->bodies);
   free(node->nodes);
 }
+
+//From http://www.cita.utoronto.ca/~dubinski/treecode/node4.html
+bool should_open_node(TreeNode *node, vec3 pos) {
+  double d = vabs(pos-node->ctr_mass);
+  double size = node->max.x - node->min.x;
+  double delta = vabs(node->ctr_mass-node->divs);
+  
+  return d < (size/NODE_OPEN_PARAM) + delta;
+}
+
+
+
+
+
 
 
 
