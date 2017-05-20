@@ -1,0 +1,141 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Configuration Options &#8212; nbody2  documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="configuration-options">
+<h1>Configuration Options<a class="headerlink" href="#configuration-options" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://github.com/tmalthouse/nbody2/blob/master/nbody2/config.h">config.h</a></p>
+<dl class="macro">
+<dt id="c.UNIT_MASS">
+<code class="descname">UNIT_MASS</code><a class="headerlink" href="#c.UNIT_MASS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>If this is defined, every body has a mass of one, and <a class="reference internal" href="body.html#c.Body.mass" title="Body.mass"><code class="xref c c-data docutils literal"><span class="pre">Body.mass</span></code></a> does not exist. This makes calculations faster.</p>
+<dl class="macro">
+<dt id="c.BIG_G">
+<code class="descname">BIG_G</code><a class="headerlink" href="#c.BIG_G" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>This represents the gravitational constant. If <a class="reference internal" href="#c.UNIT_MASS" title="UNIT_MASS"><code class="xref c c-macro docutils literal"><span class="pre">UNIT_MASS</span></code></a> is defined it has a value of 1. Otherwise, it defaults to the SI value of <span class="math">\(6.67\times10^{-11}\)</span>.</p>
+<dl class="macro">
+<dt id="c.EPSILON">
+<code class="descname">EPSILON</code><a class="headerlink" href="#c.EPSILON" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>This is the <em>softening parameter</em>, which reduces statistical anomalies.</p>
+<dl class="macro">
+<dt id="c.T_MAX">
+<code class="descname">T_MAX</code><a class="headerlink" href="#c.T_MAX" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>This is the maximum timestep. It defaults to 1000 years, although such a large timestep is rare.</p>
+<dl class="macro">
+<dt id="c.TOL_PARAM">
+<code class="descname">TOL_PARAM</code><a class="headerlink" href="#c.TOL_PARAM" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>This is used to determine a body’s ideal timestep.</p>
+<dl class="macro">
+<dt id="c.NODE_OPEN_PARAM">
+<code class="descname">NODE_OPEN_PARAM</code><a class="headerlink" href="#c.NODE_OPEN_PARAM" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>This is used to decide whether to open a node up. A higher value is faster, but less accurate.</p>
+<dl class="macro">
+<dt id="c.INITIAL_NODE_BUFFER">
+<code class="descname">INITIAL_NODE_BUFFER</code><a class="headerlink" href="#c.INITIAL_NODE_BUFFER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>This sets the number of nodes to allocate initially for the node list buffer.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/config.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, Thomas Malthouse.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/config.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

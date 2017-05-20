@@ -24,7 +24,7 @@ void update_system(System *sys) {
     }
     
     if ((sys->bodies[i].tstep)%(sys->time) == 0) {
-      update_body(&sys->bodies[i], sys->time, &sys->tree);
+      update_body(&sys->bodies[i], &sys->tree);
     }
   }
   

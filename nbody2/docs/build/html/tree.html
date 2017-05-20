@@ -1,0 +1,239 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>TreeNode &#8212; nbody2  documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="vec3" href="vec3.html" />
+    <link rel="prev" title="Tipsy Files" href="tipsy.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="treenode">
+<h1>TreeNode<a class="headerlink" href="#treenode" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://github.com/tmalthouse/nbody2/blob/master/nbody2/tree.c">tree.c</a>
+<a class="reference external" href="https://github.com/tmalthouse/nbody2/blob/master/nbody2/tree.h">tree.h</a></p>
+<dl class="type">
+<dt id="c.TreeNode">
+<code class="descname">TreeNode</code><a class="headerlink" href="#c.TreeNode" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>A node in the tree structure. Every part of the tree—root, branches, and all—consists of TreeNodes</p>
+<dl class="member">
+<dt id="c.TreeNode.nodes">
+<a class="reference internal" href="#c.TreeNode" title="TreeNode">TreeNode</a>* <code class="descname">TreeNode.nodes</code><a class="headerlink" href="#c.TreeNode.nodes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>An array of child nodes, which may or may not exist.</p>
+<dl class="member">
+<dt id="c.TreeNode.level">
+<a class="reference internal" href="builtin.html#c.uint" title="uint">uint</a> <code class="descname">TreeNode.level</code><a class="headerlink" href="#c.TreeNode.level" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>The depth of the node. The root is at level 0.</p>
+<dl class="member">
+<dt id="c.TreeNode.divs">
+<a class="reference internal" href="vec3.html#c.vec3" title="vec3">vec3</a> <code class="descname">TreeNode.divs</code><a class="headerlink" href="#c.TreeNode.divs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>The dividing lines of the node, which bisect it along each axis. Each element of this can be considered a plate orthogonal to that axis. For example, if <code class="docutils literal"><span class="pre">TreeNode.divs.x</span> <span class="pre">=</span> <span class="pre">5</span></code>, there is a plane, parallel to the y and z axes, located 5 units away from the origin. In the node shown below, the planes form the divs.</p>
+<img alt="_images/lev_0_div.jpg" src="_images/lev_0_div.jpg" />
+<dl class="member">
+<dt id="c.TreeNode.max">
+<a class="reference internal" href="vec3.html#c.vec3" title="vec3">vec3</a> <code class="descname">TreeNode.max</code><a class="headerlink" href="#c.TreeNode.max" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>This is the point furthest from the origin of the node.</p>
+<dl class="member">
+<dt id="c.TreeNode.min">
+<a class="reference internal" href="vec3.html#c.vec3" title="vec3">vec3</a> <code class="descname">TreeNode.min</code><a class="headerlink" href="#c.TreeNode.min" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>This is the closest point to the origin in the node.</p>
+<dl class="member">
+<dt id="c.TreeNode.bodies">
+<a class="reference internal" href="body.html#c.Body" title="Body">Body</a>** <code class="descname">TreeNode.bodies</code><a class="headerlink" href="#c.TreeNode.bodies" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>This is an array of pointers to the bodies contained within the node.</p>
+<dl class="member">
+<dt id="c.TreeNode.nbodies">
+<a class="reference internal" href="builtin.html#c.uint" title="uint">uint</a> <code class="descname">TreeNode.nbodies</code><a class="headerlink" href="#c.TreeNode.nbodies" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>This is the number of bodies in the previously-mentioned array.</p>
+<dl class="member">
+<dt id="c.TreeNode.mass">
+double <code class="descname">TreeNode.mass</code><a class="headerlink" href="#c.TreeNode.mass" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>This is the total mass of the node</p>
+<dl class="member">
+<dt id="c.TreeNode.ctr_mass">
+<a class="reference internal" href="vec3.html#c.vec3" title="vec3">vec3</a> <code class="descname">TreeNode.ctr_mass</code><a class="headerlink" href="#c.TreeNode.ctr_mass" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>This is the position of the center of mass of the node</p>
+<dl class="member">
+<dt id="c.TreeNode.capacity">
+<a class="reference internal" href="builtin.html#c.uint" title="uint">uint</a> <code class="descname">TreeNode.capacity</code><a class="headerlink" href="#c.TreeNode.capacity" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>This is the capacity of the <a class="reference internal" href="#c.TreeNode.bodies" title="TreeNode.bodies"><code class="xref c c-data docutils literal"><span class="pre">TreeNode.bodies</span></code></a> array.</p>
+<dl class="member">
+<dt id="c.TreeNode.initialized">
+bool <code class="descname">TreeNode.initialized</code><a class="headerlink" href="#c.TreeNode.initialized" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>This flag describes whether a given node has been initialized (has child nodes.) An uninitialized node is usually empty.</p>
+<dl class="function">
+<dt id="c.sum_mass">
+void <code class="descname">sum_mass</code><span class="sig-paren">(</span><a class="reference internal" href="#c.TreeNode" title="TreeNode">TreeNode</a><em>&nbsp;*node</em><span class="sig-paren">)</span><a class="headerlink" href="#c.sum_mass" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>This function sums up all the masses in a given node, and places the result at node-&gt;mass</p>
+<dl class="function">
+<dt id="c.should_open_node">
+bool <code class="descname">should_open_node</code><span class="sig-paren">(</span><a class="reference internal" href="#c.TreeNode" title="TreeNode">TreeNode</a><em>&nbsp;*node</em>, <a class="reference internal" href="vec3.html#c.vec3" title="vec3">vec3</a><em>&nbsp;pos</em><span class="sig-paren">)</span><a class="headerlink" href="#c.should_open_node" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>This function uses an algorithm to determine whether a node is distant enough to be considered as a single unit, or needs to be split open.</p>
+<dl class="function">
+<dt id="c.build_tree">
+<a class="reference internal" href="#c.TreeNode" title="TreeNode">TreeNode</a> <code class="descname">build_tree</code><span class="sig-paren">(</span><a class="reference internal" href="body.html#c.Body" title="Body">Body</a><em>&nbsp;*bodies</em>, <a class="reference internal" href="builtin.html#c.uint" title="uint">uint</a><em>&nbsp;count</em><span class="sig-paren">)</span><a class="headerlink" href="#c.build_tree" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>This function builds a tree for a given array of bodies. This function may take a while, but only needs to be called once.</p>
+<dl class="function">
+<dt id="c.update_tree">
+void <code class="descname">update_tree</code><span class="sig-paren">(</span><a class="reference internal" href="#c.TreeNode" title="TreeNode">TreeNode</a><em>&nbsp;*node</em><span class="sig-paren">)</span><a class="headerlink" href="#c.update_tree" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>This function goes through the bodies in a given tree, reassigning them to new nodes if they have moved.</p>
+<p>This function deletes a tree structure, traversing all the branches and freeing all allocated structures.</p>
+<div class="section" id="private-functions">
+<h2>Private Functions<a class="headerlink" href="#private-functions" title="Permalink to this headline">¶</a></h2>
+<p>These functions are only accessible from the <a class="reference external" href="https://github.com/tmalthouse/nbody2/blob/master/nbody2/tree.c">tree.c</a> file, and are documented here for reference.</p>
+<dl class="function">
+<dt id="c.coord_to_index">
+<a class="reference internal" href="builtin.html#c.uint8_t" title="uint8_t">uint8_t</a> <code class="descname">coord_to_index</code><span class="sig-paren">(</span><a class="reference internal" href="vec3.html#c.vec3" title="vec3">vec3</a><em>&nbsp;coord</em>, <a class="reference internal" href="vec3.html#c.vec3" title="vec3">vec3</a><em>&nbsp;divs</em><span class="sig-paren">)</span><a class="headerlink" href="#c.coord_to_index" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>This function maps a coordinate to an index for <a class="reference internal" href="#c.TreeNode.nodes" title="TreeNode.nodes"><code class="xref c c-data docutils literal"><span class="pre">TreeNode.nodes</span></code></a>, given a position and the TreeNode.divs planes.</p>
+<dl class="function">
+<dt id="c.max_point">
+<a class="reference internal" href="vec3.html#c.vec3" title="vec3">vec3</a> <code class="descname">max_point</code><span class="sig-paren">(</span><a class="reference internal" href="body.html#c.Body" title="Body">Body</a><em>&nbsp;*bodies</em>, <a class="reference internal" href="builtin.html#c.uint" title="uint">uint</a><em>&nbsp;count</em><span class="sig-paren">)</span><a class="headerlink" href="#c.max_point" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Given an array of bodies, this function finds the most single dimension. This is used to build the initial tree.</p>
+<dl class="function">
+<dt id="c.node_min_point">
+<a class="reference internal" href="vec3.html#c.vec3" title="vec3">vec3</a> <code class="descname">node_min_point</code><span class="sig-paren">(</span><a class="reference internal" href="vec3.html#c.vec3" title="vec3">vec3</a><em>&nbsp;min</em>, <a class="reference internal" href="vec3.html#c.vec3" title="vec3">vec3</a><em>&nbsp;div</em>, <a class="reference internal" href="builtin.html#c.uint8_t" title="uint8_t">uint8_t</a><em>&nbsp;index</em><span class="sig-paren">)</span><a class="headerlink" href="#c.node_min_point" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>This function returns the minimum point for a subnode at a given index, where its parent node has the given minima and divs. Essentially, this function is the inverse of <a class="reference internal" href="#c.coord_to_index" title="coord_to_index"><code class="xref c c-func docutils literal"><span class="pre">coord_to_index()</span></code></a> above.</p>
+<dl class="function">
+<dt id="c.center_of_mass">
+<a class="reference internal" href="vec3.html#c.vec3" title="vec3">vec3</a> <code class="descname">center_of_mass</code><span class="sig-paren">(</span><a class="reference internal" href="#c.TreeNode" title="TreeNode">TreeNode</a><em>&nbsp;*node</em><span class="sig-paren">)</span><a class="headerlink" href="#c.center_of_mass" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>This function calculates the center of mass of a node.</p>
+<p>This function powers the <a class="reference internal" href="#c.update_tree" title="update_tree"><code class="xref c c-func docutils literal"><span class="pre">update_tree()</span></code></a> function from above. It is called recursively to rebuild the tree at each timestep.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">TreeNode</a><ul>
+<li><a class="reference internal" href="#private-functions">Private Functions</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="tipsy.html" title="previous chapter">Tipsy Files</a></li>
+      <li>Next: <a href="vec3.html" title="next chapter">vec3</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/tree.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, Thomas Malthouse.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/tree.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

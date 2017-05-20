@@ -26,4 +26,6 @@ TreeNode build_tree(Body *bodies, uint count);
 
 void update_tree(TreeNode *node);
 
+void free_node(TreeNode *node);
+
 #endif /* tree_h */

@@ -10,5 +10,8 @@
 #define tipsy_h
 
 #include <stdio.h>
+#include "types.h"
+
+System load_tispy(char *file);
 
 #endif /* tipsy_h */

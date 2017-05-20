@@ -1,0 +1,150 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>vec3 &#8212; nbody2  documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="System" href="system.html" />
+    <link rel="prev" title="Welcome to nbody2’s documentation!" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="vec3">
+<h1>vec3<a class="headerlink" href="#vec3" title="Permalink to this headline">¶</a></h1>
+<dl class="type">
+<dt id="c.vec3">
+<code class="descname">vec3</code><a class="headerlink" href="#c.vec3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>A 3-dimensional vector of doubles, powered by clang vector extensions. Individual elements are accessible with dot (a.x) or array (a[0]) notation.</p>
+<dl class="macro">
+<dt id="c.vec3_0">
+<code class="descname">vec3_0</code><a class="headerlink" href="#c.vec3_0" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>A zero-vector for the vec3 type</p>
+<dl class="macro">
+<dt id="c.vec3_I">
+<code class="descname">vec3_I</code><a class="headerlink" href="#c.vec3_I" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>A vec3 v where v.x=1, and v.y=0, v.z=0</p>
+<dl class="macro">
+<dt id="c.vec3_J">
+<code class="descname">vec3_J</code><a class="headerlink" href="#c.vec3_J" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>A vec3 v where v.x=0, v.y=1, v.z=0</p>
+<dl class="macro">
+<dt id="c.vec3_K">
+<code class="descname">vec3_K</code><a class="headerlink" href="#c.vec3_K" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>A vec3 v where v.x=0, v.y=0, v.z=1</p>
+<dl class="function">
+<dt id="c.vabs">
+double <code class="descname">vabs</code><span class="sig-paren">(</span><a class="reference internal" href="#c.vec3" title="vec3">vec3</a><em>&nbsp;v</em><span class="sig-paren">)</span><a class="headerlink" href="#c.vabs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>This function gives the absolute value of a given vector v</p>
+<dl class="function">
+<dt id="c.vec3_eq">
+bool <code class="descname">vec3_eq</code><span class="sig-paren">(</span><a class="reference internal" href="#c.vec3" title="vec3">vec3</a><em>&nbsp;v</em>, <a class="reference internal" href="#c.vec3" title="vec3">vec3</a><em>&nbsp;w</em><span class="sig-paren">)</span><a class="headerlink" href="#c.vec3_eq" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>This function checks two vectors for element equality. Note that because of floating point error, this function is mostly useful for checking if a vector is uninitialized (i.e. the 0 vector.)</p>
+<dl class="function">
+<dt id="c.vec3_unit">
+<a class="reference internal" href="#c.vec3" title="vec3">vec3</a> <code class="descname">vec3_unit</code><span class="sig-paren">(</span><a class="reference internal" href="#c.vec3" title="vec3">vec3</a><em>&nbsp;v</em><span class="sig-paren">)</span><a class="headerlink" href="#c.vec3_unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Given a vector, this function returns the unit vector (i.e. the vector pointing in the same direction with magnitude 1).</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to nbody2’s documentation!</a></li>
+      <li>Next: <a href="system.html" title="next chapter">System</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/vec3.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, Thomas Malthouse.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/vec3.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

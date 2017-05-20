@@ -19,7 +19,7 @@
 
 uint64_t update_timestep (Body *b, uint64_t cur_time);
 
-void update_body (Body *b, uint64_t cur_time, TreeNode *tree);
+void update_body (Body *b, TreeNode *tree);
 
 
 #endif /* body_h */

@@ -10,15 +10,19 @@
 #define types_h
 
 
+typedef unsigned int uint;
+
+
+
 typedef enum {
   GAS_BODY,
   STAR_BODY,
   DARK_BODY
 } BodyType;
 
+
 typedef struct {
   uint32_t id;
-  uint64_t time;
   vec3 pos;
   vec3 vel;
   BodyType type;
@@ -27,7 +31,6 @@ typedef struct {
   double mass;
 #endif
   
-  //Quantities past here are 'volatile' and liable to be changed at any time. They typically shouldn't be accessed directly.
   vec3 acc;
   uint64_t tstep;
 } Body;

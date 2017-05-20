@@ -64,7 +64,7 @@ void node_finder(NodeList *l, vec3 pos, TreeNode *tree) {
 
 vec3 body_acc(TreeNode **nodes, size_t node_count, Body *b);
 
-void update_body (Body *b, uint64_t cur_time, TreeNode *tree) {
+void update_body (Body *b, TreeNode *tree) {
   static _Thread_local NodeList nodes = {};
   
   if (nodes.nodes==NULL) {
