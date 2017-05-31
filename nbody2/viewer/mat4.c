@@ -1,9 +1,9 @@
 //
-//  viewer.c
+//  mat4.c
 //  nbody2
 //
-//  Created by Thomas Malthouse on 5/23/17.
+//  Created by Thomas Malthouse on 5/31/17.
 //  Copyright © 2017 Thomas Malthouse. All rights reserved.
 //
 
-#include "viewer.h"
+#include "mat4.h"
