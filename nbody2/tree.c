@@ -10,7 +10,7 @@
 #include <string.h>
 #include <stdint.h>
 #include <stdbool.h>
-#include <tgmath.h>
+#include <math.h>
 #include "tree.h"
 #include "body.h"
 
@@ -31,17 +31,22 @@ void sum_mass(TreeNode *node) {
 #endif
 }
 
-static vec3 max_point(Body *bodies, uint count) {
+double max_point(Body *bodies, uint count) {
   double max = 0;
-  for (uint i=0; i<count; i++) {
+  for (uint64_t i=0; i<count; i++) {
     vec3 pos = bodies[i].pos;
     
     if (fabs(pos.x)>max) max = pos.x;
     if (fabs(pos.y)>max) max = pos.y;
     if (fabs(pos.z)>max) max = pos.z;
+    if (i==0) printf("i is 0. This should only be seen once per update!\n");
   }
   
-  return (vec3)(max);
+  return (max);
+}
+
+vec3 max_point_vec(Body *bodies, uint count) {
+  return (vec3)(max_point(bodies, count));
 }
 
 static inline vec3 node_min_point(vec3 min, vec3 div, uint8_t index) {
@@ -140,7 +145,7 @@ TreeNode build_tree(Body *bodies, uint count) {
   }
   node.nbodies = count;
   node.divs = vec3_0;
-  node.max = max_point(bodies, count);
+  node.max = max_point_vec(bodies, count);
   node.min = -1*node.max;
   node.initialized = true;
   

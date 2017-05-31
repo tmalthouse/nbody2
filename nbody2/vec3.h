@@ -27,4 +27,6 @@ static inline bool vec3_eq (vec3 v, vec3 w) {return v.x==w.x && v.y==w.y && v.z&
 static inline vec3 vec3_unit (vec3 v) {return v/vabs(v);}
 
 
+
+
 #endif /* vec3_h */

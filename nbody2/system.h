@@ -13,6 +13,7 @@
 #include "types.h"
 
 void update_system(System *sys);
+System random_sys(uint max_pos, uint count);
 
 
 #endif /* system_h */

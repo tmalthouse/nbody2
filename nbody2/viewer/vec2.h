@@ -11,4 +11,9 @@
 
 #include <stdio.h>
 
+typedef double vec2 __attribute__((ext_vector_type(2)));
+
+
+typedef int vec2i __attribute__((ext_vector_type(2)));
+
 #endif /* vec2_h */

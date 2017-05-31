@@ -31,5 +31,7 @@
 
 #define INITIAL_NODE_BUFFER (256)
 
+#define SHADER_DIR "/Users/Thomas/Documents/xcode/nbody2/nbody2/viewer/shaders"
+
 
 #endif /* config_h */

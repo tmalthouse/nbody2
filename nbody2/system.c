@@ -8,7 +8,9 @@
 
 #include "system.h"
 #include "tree.h"
+#include "3rdparty/pcg/pcg_basic.h"
 #include <inttypes.h>
+#include <stdlib.h>
 
 void update_system(System *sys) {
   if (!sys->tree.initialized) {
@@ -29,4 +31,30 @@ void update_system(System *sys) {
   }
   
   sys->time += sys->time%min_tstep;
+}
+
+static double randd() {
+  int main_part = pcg32_random();
+  int sign = pcg32_random();
+  return (sign%2 ? 1 : -1) * (pow((double)main_part/(double)UINT32_MAX,2));
+}
+
+System random_sys(uint max_pos, uint count) {
+  //Seed it with the address of this function
+  srand((uint)(&random_sys));
+  System s;
+  s.bodies = calloc(sizeof(Body), count);
+  
+  uint i=0;
+  while (i<count) {
+    vec3 pos = (vec3){randd(), randd(), randd()};
+    if (vabs(pos)<max_pos) {
+      s.bodies[i].pos = pos;
+      i++;
+    }
+  }
+  
+  s.count = count;
+  
+  return s;
 }

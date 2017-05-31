@@ -13,12 +13,12 @@
 #include <stdlib.h>
 
 struct tipsy_head {
-  double time ;
-  int nbodies ;
-  int ndim ;
-  int nsph ;
-  int ndark ;
-  int nstar ;
+  double time;
+  uint nbodies;
+  uint ndim;
+  uint nsph;
+  uint ndark;
+  uint nstar;
   int pad;
 };
 
@@ -29,8 +29,8 @@ struct tipsy_gas {
   float rho;
   float temp;
   float eps;
-  float metals ;
-  float phi ;
+  float metals;
+  float phi;
 };
 
 struct tipsy_dark {
@@ -45,8 +45,8 @@ struct tipsy_star {
   float mass;
   float pos[3];
   float vel[3];
-  float metals ;
-  float tform ;
+  float metals;
+  float tform;
   float eps;
   float phi;
 };

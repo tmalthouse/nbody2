@@ -28,4 +28,6 @@ void update_tree(TreeNode *node);
 
 void free_node(TreeNode *node);
 
+double max_point(Body *bodies, uint count);
+
 #endif /* tree_h */

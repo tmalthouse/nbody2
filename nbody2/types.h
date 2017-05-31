@@ -8,6 +8,7 @@
 
 #ifndef types_h
 #define types_h
+#include "vec3.h"
 
 
 typedef unsigned int uint;

@@ -10,11 +10,8 @@
 #include <stdbool.h>
 #include "system.h"
 #include "types.h"
+#include "viewer/viewer.h"
 
 int main(int argc, const char * argv[]) {
-  System s = {};
-  while (1) {
-    update_system(&s);
-  }
-  return 0;
+  testDrawTri();
 }
