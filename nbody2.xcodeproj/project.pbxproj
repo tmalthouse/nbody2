@@ -7,9 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E94353BB1EDE4FF200E2C454 /* pcg_basic.c in Sources */ = {isa = PBXBuildFile; fileRef = E94353BA1EDE4FF200E2C454 /* pcg_basic.c */; };
+		E94353C01EDF6A2E00E2C454 /* mat4.c in Sources */ = {isa = PBXBuildFile; fileRef = E94353BE1EDF6A2E00E2C454 /* mat4.c */; };
+		E94A4E7F1ED4AAC300F788C2 /* viewer.c in Sources */ = {isa = PBXBuildFile; fileRef = E94A4E7D1ED4AAC300F788C2 /* viewer.c */; };
+		E94A4E821ED4AB8200F788C2 /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E94A4E811ED4AB8200F788C2 /* libSDL2-2.0.0.dylib */; };
+		E94A4E851ED4AFE200F788C2 /* vec2.c in Sources */ = {isa = PBXBuildFile; fileRef = E94A4E831ED4AFE200F788C2 /* vec2.c */; };
+		E94A4E871ED4C77A00F788C2 /* libGLEW.1.13.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E94A4E861ED4C77A00F788C2 /* libGLEW.1.13.0.dylib */; };
 		E96564741ECF6D680052444D /* tipsy.c in Sources */ = {isa = PBXBuildFile; fileRef = E96564721ECF6D680052444D /* tipsy.c */; };
 		E96564781ECF7A0B0052444D /* system.c in Sources */ = {isa = PBXBuildFile; fileRef = E96564771ECF7A0B0052444D /* system.c */; };
-		E96564811ECF922C0052444D /* viewer.c in Sources */ = {isa = PBXBuildFile; fileRef = E965647F1ECF922C0052444D /* viewer.c */; };
+		E9BF22A31ED631AC006062C2 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9BF22A21ED631AC006062C2 /* OpenGL.framework */; };
 		E9EC681A1ECCD266005B2136 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = E9EC68191ECCD266005B2136 /* main.c */; };
 		E9EC68221ECCD274005B2136 /* tree.c in Sources */ = {isa = PBXBuildFile; fileRef = E9EC68201ECCD274005B2136 /* tree.c */; };
 		E9EC68251ECCD2E7005B2136 /* vec3.c in Sources */ = {isa = PBXBuildFile; fileRef = E9EC68231ECCD2E7005B2136 /* vec3.c */; };
@@ -29,13 +35,23 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		E94353B91EDDEB1300E2C454 /* simple_frag_shader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = simple_frag_shader.glsl; path = viewer/shaders/simple_frag_shader.glsl; sourceTree = "<group>"; };
+		E94353BA1EDE4FF200E2C454 /* pcg_basic.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pcg_basic.c; path = 3rdparty/pcg/pcg_basic.c; sourceTree = "<group>"; };
+		E94353BE1EDF6A2E00E2C454 /* mat4.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = mat4.c; path = viewer/mat4.c; sourceTree = "<group>"; };
+		E94353BF1EDF6A2E00E2C454 /* mat4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mat4.h; path = viewer/mat4.h; sourceTree = "<group>"; };
+		E94A4E7D1ED4AAC300F788C2 /* viewer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = viewer.c; path = viewer/viewer.c; sourceTree = "<group>"; };
+		E94A4E7E1ED4AAC300F788C2 /* viewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = viewer.h; path = viewer/viewer.h; sourceTree = "<group>"; };
+		E94A4E811ED4AB8200F788C2 /* libSDL2-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2-2.0.0.dylib"; path = "../../../../../usr/local/Cellar/sdl2/2.0.5/lib/libSDL2-2.0.0.dylib"; sourceTree = "<group>"; };
+		E94A4E831ED4AFE200F788C2 /* vec2.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = vec2.c; path = viewer/vec2.c; sourceTree = "<group>"; };
+		E94A4E841ED4AFE200F788C2 /* vec2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vec2.h; path = viewer/vec2.h; sourceTree = "<group>"; };
+		E94A4E861ED4C77A00F788C2 /* libGLEW.1.13.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.1.13.0.dylib; path = ../../../../../usr/local/Cellar/glew/1.13.0/lib/libGLEW.1.13.0.dylib; sourceTree = "<group>"; };
 		E96564721ECF6D680052444D /* tipsy.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = tipsy.c; sourceTree = "<group>"; };
 		E96564731ECF6D680052444D /* tipsy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tipsy.h; sourceTree = "<group>"; };
 		E96564761ECF79480052444D /* system.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = system.h; sourceTree = "<group>"; };
 		E96564771ECF7A0B0052444D /* system.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = system.c; sourceTree = "<group>"; };
 		E96564791ECF7FC60052444D /* types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = types.h; sourceTree = "<group>"; };
-		E965647F1ECF922C0052444D /* viewer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = viewer.c; path = viewer/viewer.c; sourceTree = "<group>"; };
-		E96564801ECF922C0052444D /* viewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = viewer.h; path = viewer/viewer.h; sourceTree = "<group>"; };
+		E9BF22A21ED631AC006062C2 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		E9BF59081ED8D8A7000982E5 /* body_vertex_shader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = body_vertex_shader.glsl; path = viewer/shaders/body_vertex_shader.glsl; sourceTree = "<group>"; };
 		E9EC68161ECCD266005B2136 /* nbody2 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = nbody2; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9EC68191ECCD266005B2136 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		E9EC68201ECCD274005B2136 /* tree.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = tree.c; sourceTree = "<group>"; };
@@ -52,19 +68,62 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9BF22A31ED631AC006062C2 /* OpenGL.framework in Frameworks */,
+				E94A4E871ED4C77A00F788C2 /* libGLEW.1.13.0.dylib in Frameworks */,
+				E94A4E821ED4AB8200F788C2 /* libSDL2-2.0.0.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E94353BC1EDE4FF800E2C454 /* 3rdparty */ = {
+			isa = PBXGroup;
+			children = (
+				E94353BD1EDE500000E2C454 /* pcg */,
+			);
+			name = 3rdparty;
+			sourceTree = "<group>";
+		};
+		E94353BD1EDE500000E2C454 /* pcg */ = {
+			isa = PBXGroup;
+			children = (
+				E94353BA1EDE4FF200E2C454 /* pcg_basic.c */,
+			);
+			name = pcg;
+			sourceTree = "<group>";
+		};
+		E94A4E801ED4AB8100F788C2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E9BF22A21ED631AC006062C2 /* OpenGL.framework */,
+				E94A4E861ED4C77A00F788C2 /* libGLEW.1.13.0.dylib */,
+				E94A4E811ED4AB8200F788C2 /* libSDL2-2.0.0.dylib */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E96564821ECF92360052444D /* viewer */ = {
 			isa = PBXGroup;
 			children = (
-				E965647F1ECF922C0052444D /* viewer.c */,
-				E96564801ECF922C0052444D /* viewer.h */,
+				E9BF59071ED8D829000982E5 /* shaders */,
+				E94A4E7D1ED4AAC300F788C2 /* viewer.c */,
+				E94353BE1EDF6A2E00E2C454 /* mat4.c */,
+				E94353BF1EDF6A2E00E2C454 /* mat4.h */,
+				E94A4E7E1ED4AAC300F788C2 /* viewer.h */,
+				E94A4E831ED4AFE200F788C2 /* vec2.c */,
+				E94A4E841ED4AFE200F788C2 /* vec2.h */,
 			);
 			name = viewer;
+			sourceTree = "<group>";
+		};
+		E9BF59071ED8D829000982E5 /* shaders */ = {
+			isa = PBXGroup;
+			children = (
+				E9BF59081ED8D8A7000982E5 /* body_vertex_shader.glsl */,
+				E94353B91EDDEB1300E2C454 /* simple_frag_shader.glsl */,
+			);
+			name = shaders;
 			sourceTree = "<group>";
 		};
 		E9EC680D1ECCD266005B2136 = {
@@ -72,6 +131,7 @@
 			children = (
 				E9EC68181ECCD266005B2136 /* nbody2 */,
 				E9EC68171ECCD266005B2136 /* Products */,
+				E94A4E801ED4AB8100F788C2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -86,6 +146,7 @@
 		E9EC68181ECCD266005B2136 /* nbody2 */ = {
 			isa = PBXGroup;
 			children = (
+				E94353BC1EDE4FF800E2C454 /* 3rdparty */,
 				E96564821ECF92360052444D /* viewer */,
 				E96564791ECF7FC60052444D /* types.h */,
 				E96564771ECF7A0B0052444D /* system.c */,
@@ -161,13 +222,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E96564811ECF922C0052444D /* viewer.c in Sources */,
+				E94A4E7F1ED4AAC300F788C2 /* viewer.c in Sources */,
 				E96564781ECF7A0B0052444D /* system.c in Sources */,
 				E9EC68251ECCD2E7005B2136 /* vec3.c in Sources */,
 				E9EC68291ECCD4BB005B2136 /* body.c in Sources */,
 				E9EC681A1ECCD266005B2136 /* main.c in Sources */,
+				E94353C01EDF6A2E00E2C454 /* mat4.c in Sources */,
 				E9EC68221ECCD274005B2136 /* tree.c in Sources */,
+				E94353BB1EDE4FF200E2C454 /* pcg_basic.c in Sources */,
 				E96564741ECF6D680052444D /* tipsy.c in Sources */,
+				E94A4E851ED4AFE200F788C2 /* vec2.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,6 +330,13 @@
 		E9EC681E1ECCD266005B2136 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				HEADER_SEARCH_PATHS = /usr/local/include;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/sdl2/2.0.5/lib,
+					/usr/local/Cellar/glew/1.13.0/lib,
+				);
+				OTHER_CFLAGS = "-march=native";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -273,6 +344,14 @@
 		E9EC681F1ECCD266005B2136 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_OPTIMIZATION_LEVEL = fast;
+				HEADER_SEARCH_PATHS = /usr/local/include;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/sdl2/2.0.5/lib,
+					/usr/local/Cellar/glew/1.13.0/lib,
+				);
+				OTHER_CFLAGS = "-march=native";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

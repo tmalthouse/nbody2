@@ -1,9 +1,12 @@
 #! /bin/sh
 
-dirs="_images _static _sources"
+uploads="_images _static _sources *.html"
 
-sshpass -fpass scp build/html/*.html thmalthou@sftp.reed.edu:html/nbody2-docs/
+full_uploads=""
 
-for d in $dirs; do
-	sshpass -fpass scp -r build/html/$d thmalthou@sftp.reed.edu:html/nbody2-docs/
+for i in $uploads; do
+	full_uploads="$full_uploads build/html/$i"
 done
+
+#echo $full_uploads
+scp -r $full_uploads thmalthou@sftp.reed.edu:html/nbody2-docs/
