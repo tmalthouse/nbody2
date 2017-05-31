@@ -1,3 +1,3 @@
 *.html
-nbody2/build/
+nbody2/build/*
 *.o
