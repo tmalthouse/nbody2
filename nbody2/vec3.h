@@ -22,7 +22,9 @@ typedef double vec3 __attribute__((ext_vector_type(3)));
 
 static inline double vabs (vec3 v) {return sqrt(v.x*v.x + v.y*v.y + v.z*v.z);}
 
-static inline bool vec3_eq (vec3 v, vec3 w) {return v.x==w.x && v.y==w.y && v.z&&w.z;}
+static inline bool vec3_eq (vec3 v, vec3 w) {
+  return v.x==w.x && v.y==w.y && v.z==w.z;
+}
 
 static inline vec3 vec3_unit (vec3 v) {return v/vabs(v);}
 

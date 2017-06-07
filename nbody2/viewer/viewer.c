@@ -178,18 +178,18 @@ void draw_bodies (SDL2Context c, Body *bodies, uint count);
 void testDrawTri() {
   srand((int)time(NULL));
   SDL2Context c = new_SDL2Context(SDL_INIT_VIDEO);
-  //System s = random_sys(1e10, 50000);
-  System s = load_tispy("/Users/Thomas/Downloads/IsolatedCollapse.000000");
+  System s = random_sys(1e10, 1000);
+  //System s = load_tispy("/Users/Thomas/Downloads/IsolatedCollapse.000000");
+  s.tree = build_tree(s.bodies, s.count);
+  
   init_shaders(&c);
   
   
   
   SDL_Event e;
   
-  
-  int i = 0;
   while(1) {
-    i = (i==5)?0:i+1;
+    update_system(&s);
     //float r = randf()/2, g = randf()/2, b = randf()/2;
     float r=0,g=0,b=0;
     printf("%d %d %d\n",(int)(r*255),(int)(g*255),(int)(b*255));
@@ -200,7 +200,8 @@ void testDrawTri() {
     
     
     SDL_GL_SwapWindow(c.win);
-    SDL_Delay(1000);
+    SDL_Delay(5);
+    printf("%llu\n", s.time);
     
     
     while (SDL_PollEvent(&e)) {

@@ -11,7 +11,9 @@
 #include "system.h"
 #include "types.h"
 #include "viewer/viewer.h"
+#include "tests/tests.h"
 
 int main(int argc, const char * argv[]) {
-  testDrawTri();
+  //testDrawTri();
+  runtests();
 }

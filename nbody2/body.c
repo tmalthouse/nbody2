@@ -131,7 +131,7 @@ vec3 body_acc(TreeNode **nodes, size_t node_count, Body *b) {
 #ifdef UNIT_MASS
         net_acc += g_acc(b->pos, cur->pos, 1);
 #else
-        net_acc += g_acc(b->pos, b->mass, cur->pos, cur->mass);
+        net_acc += g_acc(b->pos, cur->pos, cur->mass);
 #endif
         break;
       }

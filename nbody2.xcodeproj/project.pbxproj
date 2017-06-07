@@ -15,6 +15,8 @@
 		E94A4E871ED4C77A00F788C2 /* libGLEW.1.13.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E94A4E861ED4C77A00F788C2 /* libGLEW.1.13.0.dylib */; };
 		E96564741ECF6D680052444D /* tipsy.c in Sources */ = {isa = PBXBuildFile; fileRef = E96564721ECF6D680052444D /* tipsy.c */; };
 		E96564781ECF7A0B0052444D /* system.c in Sources */ = {isa = PBXBuildFile; fileRef = E96564771ECF7A0B0052444D /* system.c */; };
+		E9AD70B11EE7D02300C74E69 /* test_vec3.c in Sources */ = {isa = PBXBuildFile; fileRef = E9AD70AF1EE7D02300C74E69 /* test_vec3.c */; };
+		E9AD70B51EE7D1E900C74E69 /* tests.c in Sources */ = {isa = PBXBuildFile; fileRef = E9AD70B31EE7D1E900C74E69 /* tests.c */; };
 		E9BF22A31ED631AC006062C2 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9BF22A21ED631AC006062C2 /* OpenGL.framework */; };
 		E9EC681A1ECCD266005B2136 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = E9EC68191ECCD266005B2136 /* main.c */; };
 		E9EC68221ECCD274005B2136 /* tree.c in Sources */ = {isa = PBXBuildFile; fileRef = E9EC68201ECCD274005B2136 /* tree.c */; };
@@ -50,6 +52,10 @@
 		E96564761ECF79480052444D /* system.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = system.h; sourceTree = "<group>"; };
 		E96564771ECF7A0B0052444D /* system.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = system.c; sourceTree = "<group>"; };
 		E96564791ECF7FC60052444D /* types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = types.h; sourceTree = "<group>"; };
+		E9AD70AF1EE7D02300C74E69 /* test_vec3.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = test_vec3.c; path = tests/test_vec3.c; sourceTree = "<group>"; };
+		E9AD70B01EE7D02300C74E69 /* test_vec3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = test_vec3.h; path = tests/test_vec3.h; sourceTree = "<group>"; };
+		E9AD70B31EE7D1E900C74E69 /* tests.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = tests.c; path = tests/tests.c; sourceTree = "<group>"; };
+		E9AD70B41EE7D1E900C74E69 /* tests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tests.h; path = tests/tests.h; sourceTree = "<group>"; };
 		E9BF22A21ED631AC006062C2 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		E9BF59081ED8D8A7000982E5 /* body_vertex_shader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = body_vertex_shader.glsl; path = viewer/shaders/body_vertex_shader.glsl; sourceTree = "<group>"; };
 		E9EC68161ECCD266005B2136 /* nbody2 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = nbody2; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -117,6 +123,17 @@
 			name = viewer;
 			sourceTree = "<group>";
 		};
+		E9AD70B21EE7D02C00C74E69 /* tests */ = {
+			isa = PBXGroup;
+			children = (
+				E9AD70AF1EE7D02300C74E69 /* test_vec3.c */,
+				E9AD70B01EE7D02300C74E69 /* test_vec3.h */,
+				E9AD70B31EE7D1E900C74E69 /* tests.c */,
+				E9AD70B41EE7D1E900C74E69 /* tests.h */,
+			);
+			name = tests;
+			sourceTree = "<group>";
+		};
 		E9BF59071ED8D829000982E5 /* shaders */ = {
 			isa = PBXGroup;
 			children = (
@@ -146,6 +163,7 @@
 		E9EC68181ECCD266005B2136 /* nbody2 */ = {
 			isa = PBXGroup;
 			children = (
+				E9AD70B21EE7D02C00C74E69 /* tests */,
 				E94353BC1EDE4FF800E2C454 /* 3rdparty */,
 				E96564821ECF92360052444D /* viewer */,
 				E96564791ECF7FC60052444D /* types.h */,
@@ -225,11 +243,13 @@
 				E94A4E7F1ED4AAC300F788C2 /* viewer.c in Sources */,
 				E96564781ECF7A0B0052444D /* system.c in Sources */,
 				E9EC68251ECCD2E7005B2136 /* vec3.c in Sources */,
+				E9AD70B51EE7D1E900C74E69 /* tests.c in Sources */,
 				E9EC68291ECCD4BB005B2136 /* body.c in Sources */,
 				E9EC681A1ECCD266005B2136 /* main.c in Sources */,
 				E94353C01EDF6A2E00E2C454 /* mat4.c in Sources */,
 				E9EC68221ECCD274005B2136 /* tree.c in Sources */,
 				E94353BB1EDE4FF200E2C454 /* pcg_basic.c in Sources */,
+				E9AD70B11EE7D02300C74E69 /* test_vec3.c in Sources */,
 				E96564741ECF6D680052444D /* tipsy.c in Sources */,
 				E94A4E851ED4AFE200F788C2 /* vec2.c in Sources */,
 			);

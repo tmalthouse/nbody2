@@ -85,30 +85,29 @@ static inline vec3 center_of_mass(TreeNode *node) {
 static void update_node(TreeNode *node) {
   if (node->nodes == NULL) {
     node->nodes = calloc(8, sizeof(TreeNode));
-  }
-  
-  //Clear the body buffers
-  for (uint i=0; i<8; i++) {
-    if (node->nodes[i].initialized) {
-      memset(node->nodes[i].bodies, 0x0, sizeof(Body*)*node->nodes[i].capacity);
-      node->nodes[i].nbodies = 0;
-    }
-  }
-  
-  for (uint i=0; i<node->nbodies; i++) {
-    uint8_t index = coord_to_index(node->bodies[i]->pos, node->divs);
-    TreeNode *child_node = &node->nodes[index];
-    
-    //If a node is new (freshly allocated), set it up and add parameters.
-    if (!child_node->initialized) {
-      child_node->min = node_min_point(node->min, node->divs, index);
-      child_node->max = node->nodes[i].min + node->divs;
+    for (uint i=0; i<8; i++) {
+      TreeNode *child_node = &node->nodes[i];
+      child_node->min = node_min_point(node->min, node->divs, i);
+      child_node->max = child_node->min + (node->max-node->divs);
       child_node->divs = (child_node->max + child_node->min)*0.5;
       child_node->bodies = calloc(sizeof(Body*), node->nbodies);
+      child_node->nodes = NULL;
       child_node->capacity = node->nbodies;
+      child_node->nbodies = 0;
+      child_node->level = node->level+1;
       child_node->initialized = true;
     }
+  }
+  
+  
+  
+  for (uint i=0; i<node->nbodies; i++) {
+    vec3 tpos = node->bodies[i]->pos;
+    vec3 tdivs = node->divs;
     
+    uint8_t index = coord_to_index(tpos, tdivs);
+    TreeNode *child_node = &node->nodes[index];
+
     //If the body ptr buffer is at capacity, double its size
     if (child_node->nbodies == child_node->capacity) {
       child_node->bodies = realloc(child_node->bodies, (2*sizeof(Body*)*child_node->capacity));
@@ -122,6 +121,14 @@ static void update_node(TreeNode *node) {
 #else
     child_node->mass += node->bodies[i]->mass;
 #endif
+  }
+  
+  //Clear the body buffers
+  for (uint i=0; i<8; i++) {
+    if (node->nodes[i].initialized) {
+      memset(node->nodes[i].bodies, 0x0, sizeof(Body*)*node->nodes[i].capacity);
+      node->nodes[i].nbodies = 0;
+    }
   }
   
   //Then recurse, and repeat the procedure for all nodes with >1 particle
@@ -148,6 +155,8 @@ TreeNode build_tree(Body *bodies, uint count) {
   node.max = max_point_vec(bodies, count);
   node.min = -1*node.max;
   node.initialized = true;
+  node.nodes = NULL;
+  node.level = 0;
   
   update_node(&node);
   
