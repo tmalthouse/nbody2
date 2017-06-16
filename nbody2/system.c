@@ -60,8 +60,7 @@ System random_sys(uint max_pos, uint count) {
     vec3 pos = (vec3){randds(), randds(), randds()};
     if (vabs(pos)<max_pos) {
       s.bodies[i].pos = pos;
-      #define vec3_to_triple(v) v.x, v.y, v.z
-      printf("Created body %d (%f, %f, %f)\n", i, vec3_to_triple(pos));
+      //printf("Created body %d (%f, %f, %f)\n", i, vec3_to_triple(pos));
 #ifndef UNIT_MASS
       s.bodies[i].mass = 1e31;
 #endif

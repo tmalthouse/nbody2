@@ -31,4 +31,6 @@ static inline float vec4_sum(vec4 v) {
   return v.x+v.y+v.z+v.w;
 }
 
+
+
 #endif /* mat4_h */

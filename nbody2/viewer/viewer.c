@@ -165,7 +165,6 @@ int init_shaders(SDL2Context *con) {
 }
 
 
-#define vec3_to_triple(v) v.x, v.y, v.z
 
 float randf() {
   return ((float)rand())/((float)RAND_MAX);
@@ -217,6 +216,9 @@ void testDrawTri() {
           break;
       }
     }
+    
+    
+    //print_tree(&s.tree);
   }
 }
 

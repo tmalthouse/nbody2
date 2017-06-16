@@ -13,7 +13,12 @@
 #include "viewer/viewer.h"
 #include "tests/tests.h"
 
+#define TESTS 0
+
 int main(int argc, const char * argv[]) {
-  //testDrawTri();
+#if TESTS
   runtests();
+#else
+  testDrawTri();
+#endif
 }

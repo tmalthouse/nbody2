@@ -54,6 +54,7 @@ struct _tree_node {
   
   uint capacity;
   bool initialized;
+  bool resized;
 };
 
 typedef struct {

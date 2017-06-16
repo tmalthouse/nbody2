@@ -11,6 +11,9 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <math.h>
+#include <float.h>
+#include <assert.h>
+#include "vec3.h"
 #include "tree.h"
 #include "body.h"
 
@@ -83,13 +86,23 @@ static inline vec3 center_of_mass(TreeNode *node) {
 }
 
 static void update_node(TreeNode *node) {
+  if (node->level == 0) {
+    double max_pt = max_point(*node->bodies, node->nbodies);
+    if (max_pt > 2*node->max.x) {
+      node->max = (vec3)(10*max_pt);
+      node->min = -node->max;
+      node->resized = true;
+      printf("Resizing tree! New max is %f\n", max_pt);
+    }
+  }
+  
+  
   if (node->nodes == NULL) {
     node->nodes = calloc(8, sizeof(TreeNode));
     for (uint i=0; i<8; i++) {
       TreeNode *child_node = &node->nodes[i];
-      child_node->min = node_min_point(node->min, node->divs, i);
-      child_node->max = child_node->min + (node->max-node->divs);
-      child_node->divs = (child_node->max + child_node->min)*0.5;
+      //This triggers calculation of bounds
+      node->resized = true;
       child_node->bodies = calloc(sizeof(Body*), node->nbodies);
       child_node->nodes = NULL;
       child_node->capacity = node->nbodies;
@@ -99,11 +112,30 @@ static void update_node(TreeNode *node) {
     }
   }
   
+  //Reset sizes, if neccessary
+  if (node->resized) {
+    for (uint i=0; i<8; i++) {
+      TreeNode *child = &node->nodes[i];
+      child->resized = true;
+      child->min = node_min_point(node->min, node->divs, i);
+      child->max = child->min + (node->max-node->divs);
+      child->divs = (child->max + child->min)*0.5;
+    }
+  }
   
+  //Clear the body buffers
+  for (uint i=0; i<8; i++) {
+    if (node->nodes[i].initialized) {
+      memset(node->nodes[i].bodies, 0x0, sizeof(Body*)*node->nodes[i].capacity);
+      node->nodes[i].nbodies = 0;
+      node->nodes[i].mass = 0;
+    }
+  }
   
   for (uint i=0; i<node->nbodies; i++) {
     vec3 tpos = node->bodies[i]->pos;
     vec3 tdivs = node->divs;
+    
     
     uint8_t index = coord_to_index(tpos, tdivs);
     TreeNode *child_node = &node->nodes[index];
@@ -123,14 +155,6 @@ static void update_node(TreeNode *node) {
 #endif
   }
   
-  //Clear the body buffers
-  for (uint i=0; i<8; i++) {
-    if (node->nodes[i].initialized) {
-      memset(node->nodes[i].bodies, 0x0, sizeof(Body*)*node->nodes[i].capacity);
-      node->nodes[i].nbodies = 0;
-    }
-  }
-  
   //Then recurse, and repeat the procedure for all nodes with >1 particle
   for (uint i=0; i<8; i++) {
     //But first, calculate the centers of mass
@@ -140,6 +164,7 @@ static void update_node(TreeNode *node) {
       update_node(&node->nodes[i]);
     }
   }
+  
 }
 
 void update_tree(TreeNode *node) {update_node(node);}
@@ -152,11 +177,14 @@ TreeNode build_tree(Body *bodies, uint count) {
   }
   node.nbodies = count;
   node.divs = vec3_0;
-  node.max = max_point_vec(bodies, count);
-  node.min = -1*node.max;
+  node.max = 10*max_point_vec(bodies, count);
+  node.min = -node.max;
   node.initialized = true;
   node.nodes = NULL;
   node.level = 0;
+
+  sum_mass(&node);
+
   
   update_node(&node);
   
@@ -184,7 +212,26 @@ bool should_open_node(TreeNode *node, vec3 pos) {
 }
 
 
+void _print_tree(TreeNode *node) {
+  char levsep[] = "|\t";
+  char preamble[512] = {};
+  
+  for (uint i=0; i<node->level; i++) {
+    strcat(preamble, levsep);
+  }
+  
+  printf("%s├ addr: %p count: %d mass: %f, CoM: (%f, %f, %f)\n", preamble, node, node->nbodies, node->mass, vec3_to_triple(node->ctr_mass));
+  if (node->nodes != NULL) {
+    for (uint i=0; i<8; i++) {
+      _print_tree(&node->nodes[i]);
+    }
+  }
+}
 
+void print_tree(TreeNode *node) {
+  _print_tree(node);
+  exit(0);
+}
 
 
 

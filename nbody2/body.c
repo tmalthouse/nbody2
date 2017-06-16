@@ -17,14 +17,17 @@ static inline uint64_t t_ideal(Body *b) {
     return 1;
   }
   
-  return sqrt(TOL_PARAM * EPSILON / vabs(b->acc));
+  //return sqrt(TOL_PARAM * EPSILON / vabs(b->acc));
+  return 1000;
 }
 
 uint64_t update_timestep (Body *b, uint64_t cur_time) {
   uint64_t t_i = t_ideal(b);
   
   //Muldavin p60
-  if (t_i < b->tstep) {
+  if (b->tstep == 0) {
+    b->tstep = t_i;
+  } else if (t_i < b->tstep) {
     b->tstep /= 2;
   } else if (t_i > 2*b->tstep && (cur_time/b->tstep)%2 == 0) {
     b->tstep *= 2;
@@ -99,6 +102,8 @@ void update_body (Body *b, TreeNode *tree) {
   
   vec3 a_fin = (a_1 + 2*a_2 + 2*a_3 + a_4)/6;
   vec3 v_fin = (v_1 + 2*v_2 + 2*v_3 + v_4)/6;
+  
+  //if (!vec3_eq(v_fin, vec3_0)) printf("Nonzero velocity on body %d\n", b->id);
   
   b->acc = a_fin;
   b->vel += a_fin*b->tstep;
