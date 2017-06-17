@@ -184,9 +184,6 @@ void testDrawTri() {
   init_shaders(&c);
   
   
-  
-  SDL_Event e;
-  
   while(1) {
     update_system(&s);
     //float r = randf()/2, g = randf()/2, b = randf()/2;
@@ -202,7 +199,7 @@ void testDrawTri() {
     SDL_Delay(5);
     printf("%llu\n", s.time);
     
-    
+    SDL_Event e;
     while (SDL_PollEvent(&e)) {
       switch (e.type) {
         case SDL_QUIT:
@@ -211,6 +208,21 @@ void testDrawTri() {
           SDL_DestroyWindow(c.win);
           exit(0);
           break;
+        
+        case SDL_KEYDOWN: {
+          SDL_KeyboardEvent key = e.key;
+          switch (key.keysym.sym) {
+            case SDLK_d: {
+              FILE *f = fopen("/Users/Thomas/treedump.txt", "w");
+              print_tree(&s.tree, f);
+              fclose(f);
+              puts("Writing tree dump");
+              SDL_Delay(1000);
+              break;
+            }
+              
+          }
+        }
           
         default:
           break;
@@ -230,7 +242,7 @@ float *serialize_positions(Body *bodies, uint count) {
   double max_pt = max_point(bodies, count);
   
   if (vector_buffer == NULL && count > 0) {
-    vector_buffer = calloc(3*count, sizeof(float));
+    vector_buffer = calloc(4*count, sizeof(float));
     cap = count;
   } else if (cap<count) {
     vector_buffer = realloc(vector_buffer, 3*count*sizeof(float));

@@ -41,6 +41,7 @@
 		E94353BA1EDE4FF200E2C454 /* pcg_basic.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pcg_basic.c; path = 3rdparty/pcg/pcg_basic.c; sourceTree = "<group>"; };
 		E94353BE1EDF6A2E00E2C454 /* mat4.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = mat4.c; path = viewer/mat4.c; sourceTree = "<group>"; };
 		E94353BF1EDF6A2E00E2C454 /* mat4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mat4.h; path = viewer/mat4.h; sourceTree = "<group>"; };
+		E945C2941EF4A3A100D4C417 /* tree_div.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = tree_div.glsl; path = viewer/shaders/tree_div.glsl; sourceTree = "<group>"; };
 		E94A4E7D1ED4AAC300F788C2 /* viewer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = viewer.c; path = viewer/viewer.c; sourceTree = "<group>"; };
 		E94A4E7E1ED4AAC300F788C2 /* viewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = viewer.h; path = viewer/viewer.h; sourceTree = "<group>"; };
 		E94A4E811ED4AB8200F788C2 /* libSDL2-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2-2.0.0.dylib"; path = "../../../../../usr/local/Cellar/sdl2/2.0.5/lib/libSDL2-2.0.0.dylib"; sourceTree = "<group>"; };
@@ -139,6 +140,7 @@
 			children = (
 				E9BF59081ED8D8A7000982E5 /* body_vertex_shader.glsl */,
 				E94353B91EDDEB1300E2C454 /* simple_frag_shader.glsl */,
+				E945C2941EF4A3A100D4C417 /* tree_div.glsl */,
 			);
 			name = shaders;
 			sourceTree = "<group>";

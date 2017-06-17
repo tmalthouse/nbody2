@@ -88,7 +88,7 @@ static inline vec3 center_of_mass(TreeNode *node) {
 static void update_node(TreeNode *node) {
   if (node->level == 0) {
     double max_pt = max_point(*node->bodies, node->nbodies);
-    if (max_pt > 2*node->max.x) {
+    if (2*max_pt > node->max.x) {
       node->max = (vec3)(10*max_pt);
       node->min = -node->max;
       node->resized = true;
@@ -212,7 +212,7 @@ bool should_open_node(TreeNode *node, vec3 pos) {
 }
 
 
-void _print_tree(TreeNode *node) {
+void _print_tree(TreeNode *node, FILE *f) {
   char levsep[] = "|\t";
   char preamble[512] = {};
   
@@ -220,17 +220,16 @@ void _print_tree(TreeNode *node) {
     strcat(preamble, levsep);
   }
   
-  printf("%s├ addr: %p count: %d mass: %f, CoM: (%f, %f, %f)\n", preamble, node, node->nbodies, node->mass, vec3_to_triple(node->ctr_mass));
+  fprintf(f, "%s├ addr: %p count: %d mass: %f, CoM: (%f, %f, %f)\n", preamble, node, node->nbodies, node->mass, vec3_to_triple(node->ctr_mass));
   if (node->nodes != NULL) {
     for (uint i=0; i<8; i++) {
-      _print_tree(&node->nodes[i]);
+      _print_tree(&node->nodes[i], f);
     }
   }
 }
 
-void print_tree(TreeNode *node) {
-  _print_tree(node);
-  exit(0);
+void print_tree(TreeNode *node, FILE *f) {
+  _print_tree(node, f);
 }
 
 

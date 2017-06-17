@@ -45,6 +45,7 @@ typedef struct {
 static void NodeList_append(NodeList *l, TreeNode *n) {
   if (l->len >= l->cap) {
     l->nodes = realloc(l->nodes, 2*l->cap*sizeof(TreeNode*));
+    l->cap *= 2;
   }
   l->nodes[l->len] = n;
   l->len++;

@@ -30,6 +30,6 @@ void free_node(TreeNode *node);
 
 double max_point(Body *bodies, uint count);
 
-void print_tree(TreeNode *node);
+void print_tree(TreeNode *node, FILE *f);
 
 #endif /* tree_h */
