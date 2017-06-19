@@ -14,6 +14,7 @@
 
 void update_system(System *sys);
 System random_sys(uint max_pos, uint count);
+double system_total_e(System *s);
 
 
 #endif /* system_h */

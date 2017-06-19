@@ -188,7 +188,6 @@ void testDrawTri() {
     update_system(&s);
     //float r = randf()/2, g = randf()/2, b = randf()/2;
     float r=0,g=0,b=0;
-    printf("%d %d %d\n",(int)(r*255),(int)(g*255),(int)(b*255));
     glClearColor(r, g, b, 0);
     
     glClear(GL_COLOR_BUFFER_BIT);
@@ -197,7 +196,6 @@ void testDrawTri() {
     
     SDL_GL_SwapWindow(c.win);
     SDL_Delay(5);
-    printf("%llu\n", s.time);
     
     SDL_Event e;
     while (SDL_PollEvent(&e)) {
@@ -220,6 +218,15 @@ void testDrawTri() {
               SDL_Delay(1000);
               break;
             }
+              
+            case SDLK_e:
+              printf("Total system kinetic energy: %f\n", system_total_e(&s));
+              break;
+            
+            case SDLK_TAB:
+              s = random_sys(1e10, 1000);
+              s.tree = build_tree(s.bodies, 1000);
+              break;
               
           }
         }

@@ -39,13 +39,13 @@ double max_point(Body *bodies, uint count) {
   for (uint64_t i=0; i<count; i++) {
     vec3 pos = bodies[i].pos;
     
-    if (fabs(pos.x)>max) max = pos.x;
-    if (fabs(pos.y)>max) max = pos.y;
-    if (fabs(pos.z)>max) max = pos.z;
-    if (i==0) printf("i is 0. This should only be seen once per update!\n");
+    if (fabs(pos.x)>max) max = fabs(pos.x);
+    if (fabs(pos.y)>max) max = fabs(pos.y);
+    if (fabs(pos.z)>max) max = fabs(pos.z);
   }
+  assert (max >= 0);
   
-  return (max);
+  return max;
 }
 
 vec3 max_point_vec(Body *bodies, uint count) {
@@ -89,6 +89,7 @@ static void update_node(TreeNode *node) {
   if (node->level == 0) {
     double max_pt = max_point(*node->bodies, node->nbodies);
     if (2*max_pt > node->max.x) {
+      assert(max_pt > 0);
       node->max = (vec3)(10*max_pt);
       node->min = -node->max;
       node->resized = true;
@@ -213,19 +214,27 @@ bool should_open_node(TreeNode *node, vec3 pos) {
 
 
 void _print_tree(TreeNode *node, FILE *f) {
-  char levsep[] = "|\t";
+  char levsep[] = "\u2503\t";
   char preamble[512] = {};
+  
+  //Don't print if the node is empty
+  if (node->nbodies == 0) {return;};
   
   for (uint i=0; i<node->level; i++) {
     strcat(preamble, levsep);
   }
   
-  fprintf(f, "%s├ addr: %p count: %d mass: %f, CoM: (%f, %f, %f)\n", preamble, node, node->nbodies, node->mass, vec3_to_triple(node->ctr_mass));
-  if (node->nodes != NULL) {
+  
+  if (node->nbodies == 1) {
+    Body *b = node->bodies[0];
+    fprintf(f, "%s\u2523Body: addr: %p loc: (%.2f, %.2f, %.2f) vel: (%.2f, %.2f, %.2f)\n", preamble, b, vec3_to_triple(b->pos), vec3_to_triple(b->vel));
+  } else {
+    fprintf(f, "%s\u2523Node: addr: %p count: %d mass: %f, CoM: (%.2f, %.2f, %.2f)\n", preamble, node, node->nbodies, node->mass, vec3_to_triple(node->ctr_mass));
     for (uint i=0; i<8; i++) {
       _print_tree(&node->nodes[i], f);
     }
   }
+  
 }
 
 void print_tree(TreeNode *node, FILE *f) {

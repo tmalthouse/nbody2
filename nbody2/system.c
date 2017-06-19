@@ -10,6 +10,7 @@
 #include "tree.h"
 #include "body.h"
 #include "3rdparty/pcg/pcg_basic.h"
+#include "vec3.h"
 #include <inttypes.h>
 #include <stdlib.h>
 
@@ -36,6 +37,22 @@ void update_system(System *sys) {
   }
   
   sys->time += min_tstep?sys->time%min_tstep:1000;
+}
+
+double system_total_e(System *s) {
+  double e = 0;
+  
+  for (uint i=0; i<s->count; i++) {
+#ifdef UNIT_MASS
+    double mass = 1;
+#else
+    double mass = s->bodies[i].mass;
+#endif
+    
+    e += 0.5 * mass * vabs(s->bodies[i].vel);
+  }
+  
+  return e;
 }
 
 #define pcg32_random rand
