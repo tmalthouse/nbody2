@@ -20,7 +20,7 @@
 #endif
 
 //Softening factor
-#define EPSILON 0.005
+#define EPSILON 0.05
 
 //Max timestep (in seconds.) Must be an integer, max 2^64 (so not a problem)
 #define T_MAX (31500000000u) //1,000 years

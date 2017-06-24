@@ -10,7 +10,7 @@
 
 const char *current_test_func;
 
-bool (*funclist[])() = {test_vabs, test_vec3_eq};
+bool (*funclist[])() = {test_vabs, test_vec3_eq, test_inv_vabs};
 char success[] = "\u2705 Function %s passed!\n";
 char failure[] = "\u274C Function %s failed!\n";
 

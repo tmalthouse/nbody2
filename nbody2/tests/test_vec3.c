@@ -37,3 +37,14 @@ bool test_vabs() {
     
   return !status;
 }
+
+bool test_inv_vabs() {
+  INIT_TEST;
+  int status = 0;
+  
+  status += inv_vabs((vec3){4,0,0}) - 0.5 > FLOAT_TOL;
+  
+  status += inv_vabs((vec3) {3,4,0}) - 0.2 > FLOAT_TOL;
+  
+  return !status;
+}

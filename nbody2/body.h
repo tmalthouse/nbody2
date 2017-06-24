@@ -15,6 +15,7 @@
 #include "config.h"
 #include "types.h"
 
+extern uint total_force_calcs;
 
 
 uint64_t update_timestep (Body *b, uint64_t cur_time);

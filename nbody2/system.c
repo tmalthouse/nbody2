@@ -9,10 +9,12 @@
 #include "system.h"
 #include "tree.h"
 #include "body.h"
-#include "3rdparty/pcg/pcg_basic.h"
 #include "vec3.h"
 #include <inttypes.h>
 #include <stdlib.h>
+#include <tgmath.h>
+#include <time.h>
+#include <gsl/gsl_rng.h>
 
 void update_system(System *sys) {
   if (!sys->tree.initialized) {
@@ -90,3 +92,59 @@ System random_sys(uint max_pos, uint count) {
   
   return s;
 }
+
+static double rand_dist(gsl_rng *r, double max) {
+  double dist = max * pow(gsl_rng_uniform(r), 2);
+  return dist;
+}
+
+static double rand_theta(gsl_rng *r) {
+  return 2 * M_PI * gsl_rng_uniform(r);
+}
+
+static Body random_body(gsl_rng *r, double max) {
+  static uint id = 0;
+  double theta = rand_theta(r);
+  double dist = rand_dist(r, max);
+  
+  double x = dist * sin(theta);
+  double y = dist * cos(theta);
+  
+  vec3 pos = (vec3){x, y, 0.0};
+  
+  double base_vel = 100*sqrt(dist/max);
+  
+  double x_vel = -base_vel * cos(theta);
+  double y_vel = base_vel * sin(theta);
+  
+  vec3 vel = (vec3){x_vel, y_vel, 0.0};
+  
+  Body b = {};
+  
+  b.pos = pos;
+  b.vel = vel;
+#ifndef UNIT_MASS
+  b.mass = 1e25;
+#endif
+  b.id = id++;
+  
+  return b;
+}
+
+System random_disk(double max, uint count) {
+  System s = {};
+  s.count = count;
+  s.bodies = calloc(sizeof(Body), count);
+  
+  gsl_rng_default_seed = time(NULL);
+  gsl_rng_env_setup();
+  gsl_rng *r = gsl_rng_alloc(gsl_rng_default);
+  
+  for (uint i=0; i<count; i++) {
+    s.bodies[i] = random_body(r, max);
+  }
+  
+  gsl_rng_free(r);
+  return s;
+}
+

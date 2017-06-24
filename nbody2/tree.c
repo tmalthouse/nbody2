@@ -127,7 +127,6 @@ static void update_node(TreeNode *node) {
   //Clear the body buffers
   for (uint i=0; i<8; i++) {
     if (node->nodes[i].initialized) {
-      memset(node->nodes[i].bodies, 0x0, sizeof(Body*)*node->nodes[i].capacity);
       node->nodes[i].nbodies = 0;
       node->nodes[i].mass = 0;
     }
@@ -194,13 +193,16 @@ TreeNode build_tree(Body *bodies, uint count) {
 
 void free_node(TreeNode *node) {
   for (uint i=0; i<8; i++) {
-    if (node->nodes[i].initialized) {
+    if (node->nodes && node->nodes[i].initialized) {
       free_node(&node->nodes[i]);
     }
   }
   
   free(node->bodies);
   free(node->nodes);
+  
+  node->nodes = NULL;
+  node->bodies = NULL;
 }
 
 //From http://www.cita.utoronto.ca/~dubinski/treecode/node4.html
@@ -210,6 +212,18 @@ bool should_open_node(TreeNode *node, vec3 pos) {
   double delta = vabs(node->ctr_mass-node->divs);
   
   return d < (size/NODE_OPEN_PARAM) + delta;
+}
+
+void prune_tree(TreeNode *tree) {
+  if (tree->nbodies == 0) {
+    free_node(tree);
+  } else if (tree->nodes != NULL) {
+    for (uint i=0; i<8; i++) {
+      prune_tree(&tree->nodes[i]);
+    }
+  }
+  
+  if (tree->level == 0) puts("pruned tree");
 }
 
 

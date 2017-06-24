@@ -32,4 +32,6 @@ double max_point(Body *bodies, uint count);
 
 void print_tree(TreeNode *node, FILE *f);
 
+void prune_tree(TreeNode *tree);
+
 #endif /* tree_h */

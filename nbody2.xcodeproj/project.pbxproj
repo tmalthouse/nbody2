@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E94353BB1EDE4FF200E2C454 /* pcg_basic.c in Sources */ = {isa = PBXBuildFile; fileRef = E94353BA1EDE4FF200E2C454 /* pcg_basic.c */; };
+		E921EF091EF8D9FC0051D96D /* libgsl.19.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E921EF081EF8D9FC0051D96D /* libgsl.19.dylib */; };
 		E94353C01EDF6A2E00E2C454 /* mat4.c in Sources */ = {isa = PBXBuildFile; fileRef = E94353BE1EDF6A2E00E2C454 /* mat4.c */; };
 		E94A4E7F1ED4AAC300F788C2 /* viewer.c in Sources */ = {isa = PBXBuildFile; fileRef = E94A4E7D1ED4AAC300F788C2 /* viewer.c */; };
 		E94A4E821ED4AB8200F788C2 /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E94A4E811ED4AB8200F788C2 /* libSDL2-2.0.0.dylib */; };
@@ -37,6 +37,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		E921EF081EF8D9FC0051D96D /* libgsl.19.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libgsl.19.dylib; path = ../../../../../usr/local/Cellar/gsl/2.2.1/lib/libgsl.19.dylib; sourceTree = "<group>"; };
 		E94353B91EDDEB1300E2C454 /* simple_frag_shader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = simple_frag_shader.glsl; path = viewer/shaders/simple_frag_shader.glsl; sourceTree = "<group>"; };
 		E94353BA1EDE4FF200E2C454 /* pcg_basic.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pcg_basic.c; path = 3rdparty/pcg/pcg_basic.c; sourceTree = "<group>"; };
 		E94353BE1EDF6A2E00E2C454 /* mat4.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = mat4.c; path = viewer/mat4.c; sourceTree = "<group>"; };
@@ -75,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E921EF091EF8D9FC0051D96D /* libgsl.19.dylib in Frameworks */,
 				E9BF22A31ED631AC006062C2 /* OpenGL.framework in Frameworks */,
 				E94A4E871ED4C77A00F788C2 /* libGLEW.1.13.0.dylib in Frameworks */,
 				E94A4E821ED4AB8200F788C2 /* libSDL2-2.0.0.dylib in Frameworks */,
@@ -103,6 +105,7 @@
 		E94A4E801ED4AB8100F788C2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E921EF081EF8D9FC0051D96D /* libgsl.19.dylib */,
 				E9BF22A21ED631AC006062C2 /* OpenGL.framework */,
 				E94A4E861ED4C77A00F788C2 /* libGLEW.1.13.0.dylib */,
 				E94A4E811ED4AB8200F788C2 /* libSDL2-2.0.0.dylib */,
@@ -250,7 +253,6 @@
 				E9EC681A1ECCD266005B2136 /* main.c in Sources */,
 				E94353C01EDF6A2E00E2C454 /* mat4.c in Sources */,
 				E9EC68221ECCD274005B2136 /* tree.c in Sources */,
-				E94353BB1EDE4FF200E2C454 /* pcg_basic.c in Sources */,
 				E9AD70B11EE7D02300C74E69 /* test_vec3.c in Sources */,
 				E96564741ECF6D680052444D /* tipsy.c in Sources */,
 				E94A4E851ED4AFE200F788C2 /* vec2.c in Sources */,
@@ -352,13 +354,14 @@
 		E9EC681E1ECCD266005B2136 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_C_LANGUAGE_STANDARD = gnu11;
 				HEADER_SEARCH_PATHS = /usr/local/include;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/usr/local/Cellar/sdl2/2.0.5/lib,
 					/usr/local/Cellar/glew/1.13.0/lib,
+					/usr/local/Cellar/gsl/2.2.1/lib,
 				);
-				OTHER_CFLAGS = "-march=native";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -366,12 +369,14 @@
 		E9EC681F1ECCD266005B2136 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_OPTIMIZATION_LEVEL = fast;
 				HEADER_SEARCH_PATHS = /usr/local/include;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/usr/local/Cellar/sdl2/2.0.5/lib,
 					/usr/local/Cellar/glew/1.13.0/lib,
+					/usr/local/Cellar/gsl/2.2.1/lib,
 				);
 				OTHER_CFLAGS = "-march=native";
 				PRODUCT_NAME = "$(TARGET_NAME)";

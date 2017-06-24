@@ -177,7 +177,7 @@ void draw_bodies (SDL2Context c, Body *bodies, uint count);
 void testDrawTri() {
   srand((int)time(NULL));
   SDL2Context c = new_SDL2Context(SDL_INIT_VIDEO);
-  System s = random_sys(1e10, 1000);
+  System s = random_disk(1e6, 10000);
   //System s = load_tispy("/Users/Thomas/Downloads/IsolatedCollapse.000000");
   s.tree = build_tree(s.bodies, s.count);
   
@@ -195,7 +195,9 @@ void testDrawTri() {
     
     
     SDL_GL_SwapWindow(c.win);
-    SDL_Delay(5);
+    //SDL_Delay(5);
+    
+    total_force_calcs = 0;
     
     SDL_Event e;
     while (SDL_PollEvent(&e)) {
@@ -224,8 +226,12 @@ void testDrawTri() {
               break;
             
             case SDLK_TAB:
-              s = random_sys(1e10, 1000);
-              s.tree = build_tree(s.bodies, 1000);
+              s = random_disk(1e6, 2000);
+              s.tree = build_tree(s.bodies, s.count);
+              break;
+              
+            case SDLK_BACKSPACE:
+              prune_tree(&s.tree);
               break;
               
           }
@@ -246,7 +252,8 @@ float *serialize_positions(Body *bodies, uint count) {
   static float *vector_buffer = NULL;
   static uint cap = 0;
   
-  double max_pt = max_point(bodies, count);
+  static double max_pt = 0;
+  if (max_pt==0) {max_pt = 2*max_point(bodies, count);};
   
   if (vector_buffer == NULL && count > 0) {
     vector_buffer = calloc(4*count, sizeof(float));
