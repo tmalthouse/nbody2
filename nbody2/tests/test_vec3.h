@@ -16,6 +16,9 @@
 bool test_vec3_eq();
 bool test_vabs();
 bool test_inv_vabs();
+bool test_fastinvsqrt();
+
+time_t benchmark_vec3_normalize();
 
 
 #endif /* test_vec3_h */

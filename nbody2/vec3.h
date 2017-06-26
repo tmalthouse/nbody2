@@ -27,6 +27,7 @@ typedef double vec3 __attribute__((ext_vector_type(3)));
 static inline float fastinvsqrt(float f) {
   float result;
   asm ("rsqrtss %[output], %[base] \n"  : [output] "=x" (result) : [base] "x" (f));
+  result = result * (1.5f - (f * 0.5 * result * result));
   return result;
 }
 
@@ -34,11 +35,13 @@ static inline float fastsqrt(float f) {
   return f * fastinvsqrt(f);
 }
 
-static inline double vabs (vec3 v) {return fastsqrt(v.x*v.x + v.y*v.y + v.z*v.z);}
+static inline double vabs (vec3 v) {return (double)fastsqrt((float)v.x*v.x + v.y*v.y + v.z*v.z);}
 
-// This crazy function uses the rsqrtss assembly instruction
+// This crazy function uses the rsqrtss assembly instruction to calculate the square root
+// According to http://assemblyrequired.crashworks.org/timing-square-root/ ,
+// this is 4 times faster than sqrtss, and 8 times faster than sqrt()
 static inline float inv_vabs(vec3 v) {
-  float base = (float)(v.x*v.x+v.y*v.y+v.z+v.z);
+  float base = (float)(v.x*v.x+v.y*v.y+v.z*v.z);
   float result;
   
   asm ("rsqrtss %[output], %[base] \n"  : [output] "=x" (result) : [base] "x" (base));
@@ -50,7 +53,7 @@ static inline bool vec3_eq (vec3 v, vec3 w) {
   return v.x==w.x && v.y==w.y && v.z==w.z;
 }
 
-static inline vec3 vec3_unit (vec3 v) {return v*inv_vabs(v);}
+static inline vec3 vec3_normalize (vec3 v) {return v*inv_vabs(v);}
 
 
 

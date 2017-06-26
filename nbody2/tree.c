@@ -214,6 +214,8 @@ bool should_open_node(TreeNode *node, vec3 pos) {
   return d < (size/NODE_OPEN_PARAM) + delta;
 }
 
+
+
 void prune_tree(TreeNode *tree) {
   if (tree->nbodies == 0) {
     free_node(tree);
