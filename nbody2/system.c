@@ -112,7 +112,7 @@ static Body random_body(gsl_rng *r, double max) {
   
   vec3 pos = (vec3){x, y, 0.0};
   
-  double base_vel = 100*sqrt(dist/max);
+  double base_vel = sqrt(dist/max);
   
   double x_vel = -base_vel * cos(theta);
   double y_vel = base_vel * sin(theta);

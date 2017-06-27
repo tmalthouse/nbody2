@@ -11,8 +11,8 @@
 const char *current_test_func;
 
 bool (*funclist[])() = {test_vabs, test_vec3_eq, test_inv_vabs, test_fastinvsqrt};
-char success[] = "\u2705 Function %s passed!\n";
-char failure[] = "\u274C Function %s failed!\n";
+char success[] = "\u2705 Function %s passed!\n\n";
+char failure[] = "\u274C Function %s failed!\n\n";
 
 void runtests(bool benchmark) {
   uint count = sizeof(funclist)/sizeof(void *);

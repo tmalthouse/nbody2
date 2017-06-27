@@ -39,7 +39,6 @@
 /* Begin PBXFileReference section */
 		E921EF081EF8D9FC0051D96D /* libgsl.19.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libgsl.19.dylib; path = ../../../../../usr/local/Cellar/gsl/2.2.1/lib/libgsl.19.dylib; sourceTree = "<group>"; };
 		E94353B91EDDEB1300E2C454 /* simple_frag_shader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = simple_frag_shader.glsl; path = viewer/shaders/simple_frag_shader.glsl; sourceTree = "<group>"; };
-		E94353BA1EDE4FF200E2C454 /* pcg_basic.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pcg_basic.c; path = 3rdparty/pcg/pcg_basic.c; sourceTree = "<group>"; };
 		E94353BE1EDF6A2E00E2C454 /* mat4.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = mat4.c; path = viewer/mat4.c; sourceTree = "<group>"; };
 		E94353BF1EDF6A2E00E2C454 /* mat4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mat4.h; path = viewer/mat4.h; sourceTree = "<group>"; };
 		E945C2941EF4A3A100D4C417 /* tree_div.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = tree_div.glsl; path = viewer/shaders/tree_div.glsl; sourceTree = "<group>"; };
@@ -86,22 +85,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		E94353BC1EDE4FF800E2C454 /* 3rdparty */ = {
-			isa = PBXGroup;
-			children = (
-				E94353BD1EDE500000E2C454 /* pcg */,
-			);
-			name = 3rdparty;
-			sourceTree = "<group>";
-		};
-		E94353BD1EDE500000E2C454 /* pcg */ = {
-			isa = PBXGroup;
-			children = (
-				E94353BA1EDE4FF200E2C454 /* pcg_basic.c */,
-			);
-			name = pcg;
-			sourceTree = "<group>";
-		};
 		E94A4E801ED4AB8100F788C2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -169,7 +152,6 @@
 			isa = PBXGroup;
 			children = (
 				E9AD70B21EE7D02C00C74E69 /* tests */,
-				E94353BC1EDE4FF800E2C454 /* 3rdparty */,
 				E96564821ECF92360052444D /* viewer */,
 				E96564791ECF7FC60052444D /* types.h */,
 				E96564771ECF7A0B0052444D /* system.c */,
@@ -354,14 +336,18 @@
 		E9EC681E1ECCD266005B2136 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ENABLE_TESTABILITY = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_VERSION = "";
 				HEADER_SEARCH_PATHS = /usr/local/include;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/usr/local/Cellar/sdl2/2.0.5/lib,
 					/usr/local/Cellar/glew/1.13.0/lib,
 					/usr/local/Cellar/gsl/2.2.1/lib,
+					/usr/local/lib,
 				);
+				OTHER_CFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -369,14 +355,17 @@
 		E9EC681F1ECCD266005B2136 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ENABLE_TESTABILITY = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_OPTIMIZATION_LEVEL = fast;
+				GCC_VERSION = "";
 				HEADER_SEARCH_PATHS = /usr/local/include;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/usr/local/Cellar/sdl2/2.0.5/lib,
 					/usr/local/Cellar/glew/1.13.0/lib,
 					/usr/local/Cellar/gsl/2.2.1/lib,
+					/usr/local/lib,
 				);
 				OTHER_CFLAGS = "-march=native";
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -42,11 +42,7 @@ static inline double vabs (vec3 v) {return (double)fastsqrt((float)v.x*v.x + v.y
 // this is 4 times faster than sqrtss, and 8 times faster than sqrt()
 static inline float inv_vabs(vec3 v) {
   float base = (float)(v.x*v.x+v.y*v.y+v.z*v.z);
-  float result;
-  
-  asm ("rsqrtss %[output], %[base] \n"  : [output] "=x" (result) : [base] "x" (base));
-  
-  return result;
+  return fastinvsqrt(base);
 }
 
 static inline bool vec3_eq (vec3 v, vec3 w) {

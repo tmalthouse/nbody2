@@ -13,7 +13,7 @@
 extern const char *current_test_func;
 
 #define FLOAT_TOL (0.05)
-#define INIT_TEST current_test_func = __FUNCTION__
+#define INIT_TEST current_test_func = __FUNCTION__; printf("Testing %s:\n", current_test_func);
 
 
 bool test_vec3_eq() {
@@ -82,13 +82,15 @@ bool test_fastinvsqrt() {
 }
 
 time_t benchmark_vec3_normalize() {
-  int count = 2<<16;
+  puts("Beginning normalization benchmark...");
+  int count = 100000000;
   srand((uint)time(NULL));
   vec3 *vecs = malloc(sizeof(vec3) * count);
   vec3 *nrms = malloc(sizeof(vec3) * count);
   for (uint i=0; i<count; i++) {
     vecs[i] = (vec3){rand_sint(),rand_sint(),rand_sint()};
   }
+  printf("Created %'d vectors.\n", count);
   
   clock_t start = clock();
   
@@ -98,7 +100,10 @@ time_t benchmark_vec3_normalize() {
   
   clock_t diff = clock() - start;
   
-  printf("Time to normalize %d vectors: %lu ms\n", count, diff);
+  double t = 1000*(double)diff/CLOCKS_PER_SEC;
+  printf("Time to normalize %'d vectors: %f ms\n", count, t);
+  printf("Time per vector: %u ns\n", (uint)(t*1000000/count));
+  puts("Verifying accuracy:");
   
   int status = 0;
   
@@ -106,7 +111,7 @@ time_t benchmark_vec3_normalize() {
     status += fabs(vabs(nrms[i])-1)>FLOAT_TOL;
   }
   
-  printf("%d vectors normalized incorrectly.\n", status);
+  printf("%'d vectors normalized incorrectly.\n", status);
   return diff;
 }
 

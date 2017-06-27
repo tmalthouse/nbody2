@@ -13,7 +13,7 @@
 #include "viewer/viewer.h"
 #include "tests/tests.h"
 
-#define TESTS 1
+#define TESTS 0
 
 int main(int argc, const char * argv[]) {
 #if TESTS
