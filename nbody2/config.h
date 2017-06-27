@@ -33,5 +33,7 @@
 
 #define SHADER_DIR "/Users/Thomas/Documents/xcode/nbody2/nbody2/viewer/shaders"
 
+typedef unsigned int uint;
+
 
 #endif /* config_h */
