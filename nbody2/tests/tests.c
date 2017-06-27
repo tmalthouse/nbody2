@@ -28,3 +28,7 @@ void runtests(bool benchmark) {
     benchmark_vec3_normalize();
   }
 }
+
+int main(int argc, char **argv) {
+  runtests(true);
+}

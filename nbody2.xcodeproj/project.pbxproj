@@ -15,17 +15,26 @@
 		E94A4E871ED4C77A00F788C2 /* libGLEW.1.13.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E94A4E861ED4C77A00F788C2 /* libGLEW.1.13.0.dylib */; };
 		E96564741ECF6D680052444D /* tipsy.c in Sources */ = {isa = PBXBuildFile; fileRef = E96564721ECF6D680052444D /* tipsy.c */; };
 		E96564781ECF7A0B0052444D /* system.c in Sources */ = {isa = PBXBuildFile; fileRef = E96564771ECF7A0B0052444D /* system.c */; };
-		E9AD70B11EE7D02300C74E69 /* test_vec3.c in Sources */ = {isa = PBXBuildFile; fileRef = E9AD70AF1EE7D02300C74E69 /* test_vec3.c */; };
-		E9AD70B51EE7D1E900C74E69 /* tests.c in Sources */ = {isa = PBXBuildFile; fileRef = E9AD70B31EE7D1E900C74E69 /* tests.c */; };
 		E9BF22A31ED631AC006062C2 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9BF22A21ED631AC006062C2 /* OpenGL.framework */; };
 		E9EC681A1ECCD266005B2136 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = E9EC68191ECCD266005B2136 /* main.c */; };
 		E9EC68221ECCD274005B2136 /* tree.c in Sources */ = {isa = PBXBuildFile; fileRef = E9EC68201ECCD274005B2136 /* tree.c */; };
 		E9EC68251ECCD2E7005B2136 /* vec3.c in Sources */ = {isa = PBXBuildFile; fileRef = E9EC68231ECCD2E7005B2136 /* vec3.c */; };
 		E9EC68291ECCD4BB005B2136 /* body.c in Sources */ = {isa = PBXBuildFile; fileRef = E9EC68271ECCD4BB005B2136 /* body.c */; };
+		E9F4D3F71F03163B00E33E12 /* tests.c in Sources */ = {isa = PBXBuildFile; fileRef = E9AD70B31EE7D1E900C74E69 /* tests.c */; };
+		E9F4D3F81F03163E00E33E12 /* test_vec3.c in Sources */ = {isa = PBXBuildFile; fileRef = E9AD70AF1EE7D02300C74E69 /* test_vec3.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		E9EC68141ECCD266005B2136 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		E9F4D3EE1F03161B00E33E12 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -68,6 +77,7 @@
 		E9EC68261ECCD408005B2136 /* config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
 		E9EC68271ECCD4BB005B2136 /* body.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = body.c; sourceTree = "<group>"; };
 		E9EC68281ECCD4BB005B2136 /* body.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = body.h; sourceTree = "<group>"; };
+		E9F4D3F01F03161B00E33E12 /* nbody2-test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "nbody2-test"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +89,13 @@
 				E9BF22A31ED631AC006062C2 /* OpenGL.framework in Frameworks */,
 				E94A4E871ED4C77A00F788C2 /* libGLEW.1.13.0.dylib in Frameworks */,
 				E94A4E821ED4AB8200F788C2 /* libSDL2-2.0.0.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E9F4D3ED1F03161B00E33E12 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,6 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				E9EC68181ECCD266005B2136 /* nbody2 */,
+				E9F4D3F11F03161B00E33E12 /* nbody2-test */,
 				E9EC68171ECCD266005B2136 /* Products */,
 				E94A4E801ED4AB8100F788C2 /* Frameworks */,
 			);
@@ -144,6 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				E9EC68161ECCD266005B2136 /* nbody2 */,
+				E9F4D3F01F03161B00E33E12 /* nbody2-test */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -170,6 +189,13 @@
 			path = nbody2;
 			sourceTree = "<group>";
 		};
+		E9F4D3F11F03161B00E33E12 /* nbody2-test */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "nbody2-test";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -190,6 +216,23 @@
 			productReference = E9EC68161ECCD266005B2136 /* nbody2 */;
 			productType = "com.apple.product-type.tool";
 		};
+		E9F4D3EF1F03161B00E33E12 /* nbody2-test */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E9F4D3F61F03161B00E33E12 /* Build configuration list for PBXNativeTarget "nbody2-test" */;
+			buildPhases = (
+				E9F4D3EC1F03161B00E33E12 /* Sources */,
+				E9F4D3ED1F03161B00E33E12 /* Frameworks */,
+				E9F4D3EE1F03161B00E33E12 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "nbody2-test";
+			productName = "nbody2-test";
+			productReference = E9F4D3F01F03161B00E33E12 /* nbody2-test */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -201,6 +244,10 @@
 				TargetAttributes = {
 					E9EC68151ECCD266005B2136 = {
 						CreatedOnToolsVersion = 8.3.2;
+						ProvisioningStyle = Automatic;
+					};
+					E9F4D3EF1F03161B00E33E12 = {
+						CreatedOnToolsVersion = 8.3.3;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -218,6 +265,7 @@
 			projectRoot = "";
 			targets = (
 				E9EC68151ECCD266005B2136 /* nbody2 */,
+				E9F4D3EF1F03161B00E33E12 /* nbody2-test */,
 			);
 		};
 /* End PBXProject section */
@@ -230,14 +278,21 @@
 				E94A4E7F1ED4AAC300F788C2 /* viewer.c in Sources */,
 				E96564781ECF7A0B0052444D /* system.c in Sources */,
 				E9EC68251ECCD2E7005B2136 /* vec3.c in Sources */,
-				E9AD70B51EE7D1E900C74E69 /* tests.c in Sources */,
 				E9EC68291ECCD4BB005B2136 /* body.c in Sources */,
 				E9EC681A1ECCD266005B2136 /* main.c in Sources */,
 				E94353C01EDF6A2E00E2C454 /* mat4.c in Sources */,
 				E9EC68221ECCD274005B2136 /* tree.c in Sources */,
-				E9AD70B11EE7D02300C74E69 /* test_vec3.c in Sources */,
 				E96564741ECF6D680052444D /* tipsy.c in Sources */,
 				E94A4E851ED4AFE200F788C2 /* vec2.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E9F4D3EC1F03161B00E33E12 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E9F4D3F71F03163B00E33E12 /* tests.c in Sources */,
+				E9F4D3F81F03163E00E33E12 /* test_vec3.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -372,6 +427,20 @@
 			};
 			name = Release;
 		};
+		E9F4D3F41F03161B00E33E12 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		E9F4D3F51F03161B00E33E12 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -392,6 +461,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		E9F4D3F61F03161B00E33E12 /* Build configuration list for PBXNativeTarget "nbody2-test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E9F4D3F41F03161B00E33E12 /* Debug */,
+				E9F4D3F51F03161B00E33E12 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
