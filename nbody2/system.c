@@ -15,6 +15,9 @@
 #include <tgmath.h>
 #include <time.h>
 #include <gsl/gsl_rng.h>
+#ifndef __APPLE__
+#include <bsd/stdlib.h>
+#endif
 
 void update_system(System *sys) {
   if (!sys->tree.initialized) {

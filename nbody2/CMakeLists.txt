@@ -8,6 +8,8 @@ set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 set(CMAKE_C_COMPILER clang)
 
+find_package(OpenGL REQUIRED)
+
 add_executable(nbody2
 	main.c
 	body.c
@@ -21,9 +23,10 @@ add_executable(nbody2
 
 target_link_libraries(nbody2
 	gsl
-	opengl
+	${OPENGL_gl_LIBRARY}
 	GLEW
 	SDL2
+	bsd
 	m
 )
 

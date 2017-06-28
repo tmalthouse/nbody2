@@ -11,8 +11,7 @@
 #include <stdint.h>
 #include "vec3.h"
 
-typedef unsigned int uint;
-
+typedef unsigned uint;
 
 
 typedef enum {
