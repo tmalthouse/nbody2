@@ -21,7 +21,6 @@
 #include "../tipsy.h"
 #include "viewer.h"
 //#include <GL/glew.h>
-#include <OpenGL/gl3.h>
 #include <SDL2/SDL_opengl.h>
 
 static off_t fsize(char *f) {

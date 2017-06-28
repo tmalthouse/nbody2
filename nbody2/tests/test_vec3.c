@@ -9,6 +9,9 @@
 #include "test_vec3.h"
 #include <time.h>
 #include <stdlib.h>
+#ifndef APPLE
+#include <bsd/stdlib.h>
+#endif
 
 extern const char *current_test_func;
 

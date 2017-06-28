@@ -11,7 +11,9 @@
 
 #include <stdio.h>
 #include <stdbool.h>
+#include <time.h>
 #include "../vec3.h"
+#include "../config.h"
 
 bool test_vec3_eq();
 bool test_vabs();

@@ -11,6 +11,7 @@
 
 #include <stdio.h>
 #include "test_vec3.h"
+#include "../config.h"
 
 void runtests(bool benchmark);
 
