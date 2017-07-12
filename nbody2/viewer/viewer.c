@@ -20,16 +20,10 @@
 #include "../system.h"
 #include "../tipsy.h"
 #include "viewer.h"
-#include <GL/glew.h>
-#include <SDL2/SDL_opengl.h>
-
-#ifdef __APPLE__
+#include "mat4.h"
+//#include <GL/glew.h>
 #include <OpenGL/gl3.h>
-#else
-#include <GLES3/gl3.h>
-#include <GLES3/gl3ext.h>
-#endif
-
+#include <SDL2/SDL_opengl.h>
 
 static off_t fsize(char *f) {
   struct stat st;
@@ -190,32 +184,8 @@ float randf() {
 void draw_bodies (SDL2Context c, Body *bodies, uint count);
 
 
-void testDrawTri() {
-  srand((int)time(NULL));
-  SDL2Context c = new_SDL2Context(SDL_INIT_VIDEO);
-  System s = random_disk(1e6, 10000);
-  //System s = load_tispy("/Users/Thomas/Downloads/IsolatedCollapse.000000");
-  s.tree = build_tree(s.bodies, s.count);
-
-  init_shaders(&c);
-
-
-  while(1) {
-    update_system(&s);
-    //float r = randf()/2, g = randf()/2, b = randf()/2;
-    float r=0,g=0,b=0;
-    glClearColor(r, g, b, 0);
-
-    glClear(GL_COLOR_BUFFER_BIT);
-    draw_bodies(c, s.bodies, s.count);
-
-
-    SDL_GL_SwapWindow(c.win);
-    //SDL_Delay(5);
-
-    total_force_calcs = 0;
-
-    SDL_Event e;
+void event_handler(System *s, SDL2Context c) {
+  SDL_Event e;
     while (SDL_PollEvent(&e)) {
       switch (e.type) {
         case SDL_QUIT:
@@ -230,7 +200,7 @@ void testDrawTri() {
           switch (key.keysym.sym) {
             case SDLK_d: {
               FILE *f = fopen("/Users/Thomas/treedump.txt", "w");
-              print_tree(&s.tree, f);
+              print_tree(&s->tree, f);
               fclose(f);
               puts("Writing tree dump");
               SDL_Delay(1000);
@@ -238,16 +208,16 @@ void testDrawTri() {
             }
 
             case SDLK_e:
-              printf("Total system kinetic energy: %f\n", system_total_e(&s));
+              printf("Total system kinetic energy: %f\n", system_total_e(&(*s)));
               break;
 
             case SDLK_TAB:
-              s = random_disk(1e6, 2000);
-              s.tree = build_tree(s.bodies, s.count);
+              *s = random_disk(1e6, 2000);
+              s->tree = build_tree(s->bodies, s->count);
               break;
 
             case SDLK_BACKSPACE:
-              prune_tree(&s.tree);
+              prune_tree(&s->tree);
               break;
 
           }
@@ -257,8 +227,36 @@ void testDrawTri() {
           break;
       }
     }
+}
 
-
+void testDrawTri() {
+  srand((int)time(NULL));
+  SDL2Context c = new_SDL2Context(SDL_INIT_VIDEO);
+  System s = random_disk(1e6, 10000);
+  //System s = load_tispy("/Users/Thomas/Downloads/IsolatedCollapse.000000");
+  s.tree = build_tree(s.bodies, s.count);
+  
+  init_shaders(&c);
+  
+  
+  while(1) {
+    update_system(&s);
+    //float r = randf()/2, g = randf()/2, b = randf()/2;
+    float r=0,g=0,b=0;
+    glClearColor(r, g, b, 0);
+    
+    glClear(GL_COLOR_BUFFER_BIT);
+    draw_bodies(c, s.bodies, s.count);
+    
+    
+    SDL_GL_SwapWindow(c.win);
+    //SDL_Delay(5);
+    
+    total_force_calcs = 0;
+    
+    event_handler(&s, c);
+    
+    
     //print_tree(&s.tree);
   }
 }
@@ -321,3 +319,14 @@ void _check_gl_error(const char *file, int line) {
   }
   if (isError) exit(-1);
 }
+
+mat4 create_mvp_matrix(CameraState cam) {
+  mat4 rot = rotation_matrix(cam.azimuth, cam.altitude, 0);
+  mat4 trans = translation_matrix(vec3_to_triple(-cam.camera_pos));
+  mat4 scale = scale_matrix(1, cam.aspectRatio, 0);
+  
+  mat4 cumulative = mat4_mult(trans, mat4_mult(rot, scale));
+  
+  return cumulative;
+}
+

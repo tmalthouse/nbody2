@@ -13,7 +13,7 @@ mat4 mat4_mult(mat4 a, mat4 b) {
   mat4 result = {};
   for (uint i=0; i<4; i++) {
     for (uint j=0; j<4; j++) {
-      result.elem[i][j] = vec4_sum(mat4_col(a, j) * mat4_col(b, i));
+      result.elem[i][j] = vec4_sum(mat4_row(a, j) * mat4_col(b, i));
     }
   }
   
@@ -30,8 +30,9 @@ mat4 mat4_transpose(mat4 a) {
   return res;
 }
 
-mat4 new_mat4(float *elems) {
-  return (mat4){.elem = {
+inline mat4 new_mat4(float *elems) {
+  if (elems==NULL) return (mat4){};
+  else             return (mat4){.elem = {
     (vec4){elems[0], elems[4], elems[8], elems[12]},
     (vec4){elems[1], elems[5], elems[9], elems[13]},
     (vec4){elems[2], elems[6], elems[10], elems[14]},
@@ -39,7 +40,7 @@ mat4 new_mat4(float *elems) {
   };
 }
 
-mat4 rot_matrix(float x, float y, float z) {
+mat4 rotation_matrix(float x, float y, float z) {
   
   mat4 x_mat = new_mat4((float[]){
     1.0f, 0.0f,   0.0f,    0.0f,
@@ -63,4 +64,26 @@ mat4 rot_matrix(float x, float y, float z) {
   });
   
   return mat4_mult(x_mat, mat4_mult(y_mat, z_mat));
+}
+
+mat4 translation_matrix(float x, float y, float z) {
+  return new_mat4((float[]){
+    1, 0, 0, x,
+    0, 1, 0, y,
+    0, 1, 0, z,
+    0, 0, 0, 1
+  });
+}
+
+mat4 scale_matrix(float x, float y, float z) {
+  return new_mat4((float[]){
+    x, 0, 0, 0,
+    0, y, 0, 0,
+    0, 0, z, 0,
+    0, 0, 0, 1
+  });
+}
+
+mat4 uniform_scale_matrix(float f) {
+  return scale_matrix(f, f, f);
 }

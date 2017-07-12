@@ -31,6 +31,13 @@ static inline float vec4_sum(vec4 v) {
   return v.x+v.y+v.z+v.w;
 }
 
+mat4 rotation_matrix(float x, float y, float z);
+mat4 translation_matrix(float x, float y, float z);
+mat4 scale_matrix(float x, float y, float z);
+mat4 uniform_scale_matrix(float f);
+
+static mat4 mat4_id = {.elem={{1,0,0,0},{0,1,0,0},{0,0,1,0},{0,0,0,1}}};
+
 
 
 #endif /* mat4_h */

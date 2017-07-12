@@ -118,7 +118,7 @@ vec3 g_acc(vec3 pos1, vec3 pos2, double m2) {
   
   //The bottom term of this equation is (abs(v))^2==(sqrt(...))^2, which can be written as follows and avoids the expensive sqrt call.
   //The EPSILON softening factor improves accuracy for short-distance interactions (since these aren't actually bodies, but stat. objs.
-  double g_mag = (BIG_G * (m2) / (r.x*r.x+r.y*r.y+r.z*r.z + EPSILON));
+  double g_mag = (BIG_G * (m2) / (r.x*r.x+r.y*r.y+r.z*r.z + EPSILON * EPSILON));
   return g_mag * vec3_normalize(r);
 }
   

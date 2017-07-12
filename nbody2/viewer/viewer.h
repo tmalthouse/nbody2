@@ -29,6 +29,16 @@ typedef struct {
   GLuint vbo;
 } SDL2Context;
 
+typedef struct {
+  vec3 camera_pos;
+  // The angle (in rads) between the current camera longitude and the +x direction. Range between -pi and pi.
+  double azimuth;
+  // The angle between the camera view and the x/y plane. Range between -pi and pi.
+  double altitude;
+  
+  double aspectRatio;
+} CameraState;
+
 void testDrawTri();
 
 
