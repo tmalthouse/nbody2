@@ -167,7 +167,12 @@ static void update_node(TreeNode *node) {
   
 }
 
-void update_tree(TreeNode *node) {update_node(node);}
+void update_tree(TreeNode *node) {
+  update_node(node);
+  FILE *f = fopen("/Users/Thomas/Desktop/out.txt", "w");
+  print_tree(node, f);
+  fclose(f);
+}
 
 TreeNode build_tree(Body *bodies, uint count) {
   TreeNode node = {};

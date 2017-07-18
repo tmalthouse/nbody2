@@ -10,9 +10,8 @@
 #define types_h
 #include <stdint.h>
 #include "vec3.h"
-
-typedef unsigned uint;
-
+#include "c11threads.h"
+#include <stdbool.h>
 
 typedef enum {
   GAS_BODY,
@@ -36,7 +35,6 @@ typedef struct {
 } Body;
 
 
-
 typedef struct _tree_node TreeNode;
 
 struct _tree_node {
@@ -57,12 +55,31 @@ struct _tree_node {
 };
 
 typedef struct {
+  thrd_t t_id;
+  //These will not be the same for each thread.
+  Body *bodies;
+  uint count;
+  volatile bool done;
+  
+  //Whereas these will, and are updated by the root.
+  TreeNode *tree;
+  uint64_t *time;
+} CalculationThread;
+
+typedef struct {
   Body *bodies;
   uint count;
   uint64_t time;
   
   TreeNode tree;
+  
+  CalculationThread *threads;
+  uint thread_count;
+  uint base_count;
+  uint high_count;
 } System;
+
+
 
 
 

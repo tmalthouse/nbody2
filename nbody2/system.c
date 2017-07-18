@@ -10,6 +10,7 @@
 #include "tree.h"
 #include "body.h"
 #include "vec3.h"
+#include "calculationthread.h"
 #include <inttypes.h>
 #include <stdlib.h>
 #include <tgmath.h>
@@ -18,6 +19,7 @@
 #ifndef __APPLE__
 #include <bsd/stdlib.h>
 #endif
+
 
 void update_system(System *sys) {
   if (!sys->tree.initialized) {
@@ -36,12 +38,41 @@ void update_system(System *sys) {
       min_tstep = sys->bodies[i].tstep;
     }
     
-    if (sys->time == 0 || (sys->bodies[i].tstep)%(sys->time) == 0) {
-      update_body(&sys->bodies[i], &sys->tree);
+    Body *body_index = sys->bodies;
+    for (uint j=0; j<THREAD_COUNT; j++) {
+      CalculationThread *t = &sys->threads[j];
+      t->bodies = body_index;
+      t->done = false;
+      body_index += t->count;
     }
+    //Wait for threads to finish
+    int sum = 1;
+    do {
+      for (uint j=0; j<THREAD_COUNT; j++) {
+        sum*=sys->threads[j].done;
+      }
+    } while(sum);
   }
   
   sys->time += min_tstep?sys->time%min_tstep:1000;
+}
+
+void initialize_threads(System *s) {
+  s->threads = calloc(sizeof(CalculationThread), THREAD_COUNT);
+  uint basecount = s->count/THREAD_COUNT;
+  uint remainder = s->count%THREAD_COUNT;
+  for (uint i=0; i<THREAD_COUNT; i++) {
+    int status = thrd_create(&s->threads[i].t_id, thread_loop, &s->threads[i]);
+    if (status != thrd_success) {
+      printf("Error creating thread num. %d\n", i);
+      exit(-1);
+    }
+    //The first couple thread gets the normal amount of bodies, plus the remainder.
+    s->threads[i].count = (i<remainder)?basecount+1:basecount;
+    s->threads[i].done = false;
+    s->threads[i].time = &s->time;
+    s->threads[i].tree = &s->tree;
+  }
 }
 
 double system_total_e(System *s) {
@@ -76,6 +107,9 @@ System random_sys(uint max_pos, uint count) {
   srand((uint)(&random_sys));
   System s;
   s.bodies = calloc(sizeof(Body), count);
+  s.count = count;
+  s.time = 0;
+  initialize_threads(&s);
   
   uint i=0;
   while (i<count) {
@@ -90,8 +124,6 @@ System random_sys(uint max_pos, uint count) {
     }
   }
   
-  s.count = count;
-  s.time = 0;
   
   return s;
 }
@@ -112,8 +144,9 @@ static Body random_body(gsl_rng *r, double max) {
   
   double x = dist * sin(theta);
   double y = dist * cos(theta);
+  double z = max * gsl_rng_uniform(r);
   
-  vec3 pos = (vec3){x, y, 0.0};
+  vec3 pos = (vec3){x, y, z};
   
   double base_vel = sqrt(dist/max);
   
@@ -134,20 +167,21 @@ static Body random_body(gsl_rng *r, double max) {
   return b;
 }
 
-System random_disk(double max, uint count) {
-  System s = {};
-  s.count = count;
-  s.bodies = calloc(sizeof(Body), count);
+System *random_disk(double max, uint count) {
+  System *s = calloc(sizeof(System), 1);
+  s->count = count;
+  s->bodies = calloc(sizeof(Body), count);
   
   gsl_rng_default_seed = time(NULL);
   gsl_rng_env_setup();
   gsl_rng *r = gsl_rng_alloc(gsl_rng_default);
   
   for (uint i=0; i<count; i++) {
-    s.bodies[i] = random_body(r, max);
+    s->bodies[i] = random_body(r, max);
   }
   
   gsl_rng_free(r);
+  initialize_threads(s);
   return s;
 }
 

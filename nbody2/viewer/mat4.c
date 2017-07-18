@@ -8,6 +8,7 @@
 
 #include "mat4.h"
 #include <tgmath.h>
+#include <stdlib.h>
 
 mat4 mat4_mult(mat4 a, mat4 b) {
   mat4 result = {};
@@ -30,7 +31,7 @@ mat4 mat4_transpose(mat4 a) {
   return res;
 }
 
-inline mat4 new_mat4(float *elems) {
+static inline mat4 new_mat4(float *elems) {
   if (elems==NULL) return (mat4){};
   else             return (mat4){.elem = {
     (vec4){elems[0], elems[4], elems[8], elems[12]},
@@ -86,4 +87,26 @@ mat4 scale_matrix(float x, float y, float z) {
 
 mat4 uniform_scale_matrix(float f) {
   return scale_matrix(f, f, f);
+}
+
+char *mat4_string(mat4 m, char *buf) {
+  if (buf == NULL) buf = calloc(1, 1024);
+  vec4 *e = m.elem;
+  sprintf(buf,
+         "[%f,\t%f,\t%f,\t%f]\n"
+         "[%f,\t%f,\t%f,\t%f]\n"
+         "[%f,\t%f,\t%f,\t%f]\n"
+         "[%f,\t%f,\t%f,\t%f]\n",
+         e[0][0], e[0][1], e[0][2], e[0][3],
+         e[1][0], e[1][1], e[1][2], e[1][3],
+         e[2][0], e[2][1], e[2][2], e[2][3],
+         e[3][0], e[3][1], e[3][2], e[3][3]);
+  
+  return buf;
+}
+
+void print_mat4(mat4 m) {
+  char *matstr = mat4_string(m, NULL);
+  printf("%s\n", matstr);
+  free(matstr);
 }

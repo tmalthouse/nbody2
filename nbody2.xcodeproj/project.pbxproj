@@ -16,6 +16,7 @@
 		E96564741ECF6D680052444D /* tipsy.c in Sources */ = {isa = PBXBuildFile; fileRef = E96564721ECF6D680052444D /* tipsy.c */; };
 		E96564781ECF7A0B0052444D /* system.c in Sources */ = {isa = PBXBuildFile; fileRef = E96564771ECF7A0B0052444D /* system.c */; };
 		E9BF22A31ED631AC006062C2 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9BF22A21ED631AC006062C2 /* OpenGL.framework */; };
+		E9D1B5F41F183675008C955E /* calculationthread.c in Sources */ = {isa = PBXBuildFile; fileRef = E9D1B5F21F183675008C955E /* calculationthread.c */; };
 		E9EC681A1ECCD266005B2136 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = E9EC68191ECCD266005B2136 /* main.c */; };
 		E9EC68221ECCD274005B2136 /* tree.c in Sources */ = {isa = PBXBuildFile; fileRef = E9EC68201ECCD274005B2136 /* tree.c */; };
 		E9EC68251ECCD2E7005B2136 /* vec3.c in Sources */ = {isa = PBXBuildFile; fileRef = E9EC68231ECCD2E7005B2136 /* vec3.c */; };
@@ -68,6 +69,9 @@
 		E9AD70B41EE7D1E900C74E69 /* tests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tests.h; path = tests/tests.h; sourceTree = "<group>"; };
 		E9BF22A21ED631AC006062C2 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		E9BF59081ED8D8A7000982E5 /* body_vertex_shader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = body_vertex_shader.glsl; path = viewer/shaders/body_vertex_shader.glsl; sourceTree = "<group>"; };
+		E9D1B5F11F18349F008C955E /* c11threads.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = c11threads.h; sourceTree = "<group>"; };
+		E9D1B5F21F183675008C955E /* calculationthread.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = calculationthread.c; sourceTree = "<group>"; };
+		E9D1B5F31F183675008C955E /* calculationthread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = calculationthread.h; sourceTree = "<group>"; };
 		E9EC68161ECCD266005B2136 /* nbody2 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = nbody2; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9EC68191ECCD266005B2136 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		E9EC68201ECCD274005B2136 /* tree.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = tree.c; sourceTree = "<group>"; };
@@ -173,8 +177,11 @@
 				E9AD70B21EE7D02C00C74E69 /* tests */,
 				E96564821ECF92360052444D /* viewer */,
 				E96564791ECF7FC60052444D /* types.h */,
+				E9D1B5F11F18349F008C955E /* c11threads.h */,
 				E96564771ECF7A0B0052444D /* system.c */,
 				E96564761ECF79480052444D /* system.h */,
+				E9D1B5F21F183675008C955E /* calculationthread.c */,
+				E9D1B5F31F183675008C955E /* calculationthread.h */,
 				E9EC68271ECCD4BB005B2136 /* body.c */,
 				E9EC68281ECCD4BB005B2136 /* body.h */,
 				E9EC68231ECCD2E7005B2136 /* vec3.c */,
@@ -284,6 +291,7 @@
 				E9EC68221ECCD274005B2136 /* tree.c in Sources */,
 				E96564741ECF6D680052444D /* tipsy.c in Sources */,
 				E94A4E851ED4AFE200F788C2 /* vec2.c in Sources */,
+				E9D1B5F41F183675008C955E /* calculationthread.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

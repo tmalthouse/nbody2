@@ -95,7 +95,7 @@ int load_shader (GLuint *shader, char *path, GLenum shader_type) {
   shader_buf[size] = '\0';
   fclose(sh);
 
-  printf("%s\n", shader_buf);
+  
   glShaderSource(*shader, 1, (const char* const*)&shader_buf, NULL);
   free(shader_buf);
   check_gl_error();
@@ -113,7 +113,11 @@ int load_shader (GLuint *shader, char *path, GLenum shader_type) {
   char log[512];
   glGetShaderInfoLog(*shader, 512, NULL, log);
   check_gl_error();
-  printf("Log for shader %s:\n%s\n", path, log);
+
+  if (strlen(log) == 0) strcpy(log, "No errors. Compilation successful.\n");
+  
+  printf("Compiling shader %s\n%s\n", path, log);
+  
 
   return ret;
 
@@ -123,11 +127,13 @@ err:
 }
 
 int init_shaders(SDL2Context *con) {
+#ifdef __linux__
   GLenum err = glewInit();
   if (err != GLEW_OK) {
     perror("Could not initialize GLEW! Quitting");
     exit(-1);
   }
+#endif
 
   printf("Using OpenGL version %s\n", glGetString(GL_VERSION));
 
@@ -159,8 +165,11 @@ int init_shaders(SDL2Context *con) {
 
   char log[512] = {0};
   glGetProgramInfoLog(con->shader_prog, 512, NULL, log);
-  printf("Shader program info: %s\n", log);
 
+  if (strlen(log) == 0) strcpy(log, "No errors. Shader linking successful.\n");
+  printf("Linking shader program\n%s\n", log);
+  
+  
   glUseProgram(con->shader_prog);
   check_gl_error();
 
@@ -170,6 +179,8 @@ int init_shaders(SDL2Context *con) {
   glEnableVertexAttribArray(posAttrib);
   check_gl_error();
 
+  con->MVP_uni = glGetUniformLocation(con->shader_prog, "MVPmatrix");
+  
   return -1;
 
 }
@@ -181,10 +192,10 @@ float randf() {
 }
 
 
-void draw_bodies (SDL2Context c, Body *bodies, uint count);
+void draw_bodies (SDL2Context c, CameraState *cam, Body *bodies, uint count);
 
 
-void event_handler(System *s, SDL2Context c) {
+void event_handler(System *s, CameraState *cam, SDL2Context c) {
   SDL_Event e;
     while (SDL_PollEvent(&e)) {
       switch (e.type) {
@@ -208,18 +219,37 @@ void event_handler(System *s, SDL2Context c) {
             }
 
             case SDLK_e:
-              printf("Total system kinetic energy: %f\n", system_total_e(&(*s)));
+              printf("Total system kinetic energy: %f\n", system_total_e(s));
               break;
 
             case SDLK_TAB:
-              *s = random_disk(1e6, 2000);
+              s = random_disk(1e6, 100);
               s->tree = build_tree(s->bodies, s->count);
               break;
 
             case SDLK_BACKSPACE:
               prune_tree(&s->tree);
               break;
-
+            
+            case SDLK_UP:
+              cam->altitude += CONTROL_SENSITIVITY;
+              if (cam->altitude > M_PI_2) cam->altitude = M_PI_2;
+              break;
+            
+            case SDLK_DOWN:
+              cam->altitude -= CONTROL_SENSITIVITY;
+              if (cam->altitude < -M_PI_2) cam->altitude = -M_PI_2;
+              break;
+            
+            case SDLK_RIGHT:
+              cam->azimuth += CONTROL_SENSITIVITY;
+              cam->azimuth = fmod(cam->azimuth, 2*M_PI);
+              break;
+            
+            case SDLK_LEFT:
+              cam->azimuth -= CONTROL_SENSITIVITY;
+              cam->azimuth = fmod(cam->azimuth, 2*M_PI);
+              break;
           }
         }
 
@@ -232,21 +262,24 @@ void event_handler(System *s, SDL2Context c) {
 void testDrawTri() {
   srand((int)time(NULL));
   SDL2Context c = new_SDL2Context(SDL_INIT_VIDEO);
-  System s = random_disk(1e6, 10000);
+  System *s = random_disk(1e6, 1000);
   //System s = load_tispy("/Users/Thomas/Downloads/IsolatedCollapse.000000");
-  s.tree = build_tree(s.bodies, s.count);
+  s->tree = build_tree(s->bodies, s->count);
   
   init_shaders(&c);
   
+  CameraState cam;
+  cam.aspectRatio = c.screensize.x/c.screensize.y;
+  
   
   while(1) {
-    update_system(&s);
+    update_system(s);
     //float r = randf()/2, g = randf()/2, b = randf()/2;
     float r=0,g=0,b=0;
     glClearColor(r, g, b, 0);
     
     glClear(GL_COLOR_BUFFER_BIT);
-    draw_bodies(c, s.bodies, s.count);
+    draw_bodies(c, &cam, s->bodies, s->count);
     
     
     SDL_GL_SwapWindow(c.win);
@@ -254,7 +287,7 @@ void testDrawTri() {
     
     total_force_calcs = 0;
     
-    event_handler(&s, c);
+    event_handler(  s, &cam, c);
     
     
     //print_tree(&s.tree);
@@ -285,9 +318,14 @@ float *serialize_positions(Body *bodies, uint count) {
   return vector_buffer;
 }
 
-void draw_bodies (SDL2Context c, Body *bodies, uint count) {
+mat4 create_mvp_matrix(CameraState cam, double max_dist);
+
+void draw_bodies (SDL2Context c, CameraState *cam, Body *bodies, uint count) {
   check_gl_error();
 
+  mat4 mvp = create_mvp_matrix(*cam, max_point(bodies, count));
+  //print_mat4(mvp);
+  glUniformMatrix4fv(c.MVP_uni, 1, GL_FALSE, (float*)&mvp);
 
   glBufferData(GL_ARRAY_BUFFER, count*3*sizeof(float), serialize_positions(bodies, count), GL_STREAM_DRAW);check_gl_error();
 
@@ -320,12 +358,14 @@ void _check_gl_error(const char *file, int line) {
   if (isError) exit(-1);
 }
 
-mat4 create_mvp_matrix(CameraState cam) {
-  mat4 rot = rotation_matrix(cam.azimuth, cam.altitude, 0);
-  mat4 trans = translation_matrix(vec3_to_triple(-cam.camera_pos));
-  mat4 scale = scale_matrix(1, cam.aspectRatio, 0);
+mat4 create_mvp_matrix(CameraState cam, double max_dist) {
+  double scale_factor = 1/max_dist;
   
-  mat4 cumulative = mat4_mult(trans, mat4_mult(rot, scale));
+  mat4 rot = rotation_matrix(cam.altitude, 0,cam.azimuth);
+  mat4 trans = translation_matrix(vec3_to_triple(-cam.camera_pos));
+  mat4 scale = scale_matrix(cam.aspectRatio, 1, 1);
+  
+  mat4 cumulative = mat4_mult(trans, mat4_mult(scale, rot));
   
   return cumulative;
 }

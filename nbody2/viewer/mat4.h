@@ -35,6 +35,8 @@ mat4 rotation_matrix(float x, float y, float z);
 mat4 translation_matrix(float x, float y, float z);
 mat4 scale_matrix(float x, float y, float z);
 mat4 uniform_scale_matrix(float f);
+void print_mat4(mat4 m);
+char *mat4_string(mat4 m, char *buf);
 
 static mat4 mat4_id = {.elem={{1,0,0,0},{0,1,0,0},{0,0,1,0},{0,0,0,1}}};
 

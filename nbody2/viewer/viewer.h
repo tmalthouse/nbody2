@@ -27,6 +27,7 @@ typedef struct {
   GLuint shader_prog;
   GLuint vao;
   GLuint vbo;
+  GLuint MVP_uni;
 } SDL2Context;
 
 typedef struct {

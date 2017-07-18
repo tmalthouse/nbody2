@@ -8,6 +8,10 @@
 
 #ifndef config_h
 #define config_h
+#include <math.h>
+
+//The number of threads to spawn. Ideally, should match your number of procs.
+#define THREAD_COUNT (4)
 
 //Comment this out if you want bodies to have a mass != 1
 #define UNIT_MASS
@@ -32,6 +36,8 @@
 #define INITIAL_NODE_BUFFER (256)
 
 #define SHADER_DIR "/Users/Thomas/Documents/xcode/nbody2/nbody2/viewer/shaders"
+
+#define CONTROL_SENSITIVITY (M_PI/90.0)
 
 #ifndef __APPLE__
 typedef unsigned int uint;

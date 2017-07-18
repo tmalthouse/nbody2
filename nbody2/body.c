@@ -56,7 +56,7 @@ void node_finder(NodeList *l, vec3 pos, TreeNode *tree) {
   TreeNode *nodes = tree->nodes;
   
   for (uint i=0; i<8; i++) {
-    if (nodes[i].nbodies == 0) {continue;}
+    if (nodes == NULL || nodes[i].nbodies == 0) {continue;}
     
     else if (nodes[i].nbodies == 1 || !should_open_node(&nodes[i], pos)) {
       NodeList_append(l, &tree->nodes[i]);
