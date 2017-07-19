@@ -145,7 +145,6 @@ static void update_node (TreeNode *node) {
   for (uint i=0; i<8; i++) {
     //But first, calculate the centers of mass
     node->nodes[i].ctr_mass = center_of_mass(&node->nodes[i]);
-    if (isnan(node->nodes[i].ctr_mass.x)) raise(SIGFPE);
     
     if (node->nodes[i].nbodies > 1) {
       update_node(&node->nodes[i]);

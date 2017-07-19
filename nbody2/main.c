@@ -8,7 +8,6 @@
 
 #include <stdio.h>
 #include <stdbool.h>
-#include <fenv.h>
 #include "system.h"
 #include "types.h"
 #include "viewer/viewer.h"

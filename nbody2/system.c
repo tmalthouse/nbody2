@@ -37,22 +37,25 @@ void update_system(System *sys) {
     if (sys->bodies[i].tstep<min_tstep) {
       min_tstep = sys->bodies[i].tstep;
     }
-    
-    Body *body_index = sys->bodies;
-    for (uint j=0; j<THREAD_COUNT; j++) {
-      CalculationThread *t = &sys->threads[j];
-      t->bodies = body_index;
-      t->done = false;
-      body_index += t->count;
-    }
-    //Wait for threads to finish
-    int sum = 1;
-    do {
-      for (uint j=0; j<THREAD_COUNT; j++) {
-        sum*=sys->threads[j].done;
-      }
-    } while(sum);
   }
+  
+  //Set up the threads, and start them
+  Body *body_index = sys->bodies;
+  for (uint j=0; j<THREAD_COUNT; j++) {
+    CalculationThread *t = &sys->threads[j];
+    t->bodies = body_index;
+    t->done = false;
+    body_index += t->count;
+  }
+  
+  //Wait for threads to finish
+  int sum;
+  do {
+    sum = 1;
+    for (uint j=0; j<THREAD_COUNT; j++) {
+      sum*=sys->threads[j].done;
+    }
+  } while(!sum);
   
   sys->time += min_tstep?sys->time%min_tstep:1000;
 }
@@ -148,7 +151,7 @@ static Body random_body(gsl_rng *r, double max) {
   
   vec3 pos = (vec3){x, y, z};
   
-  double base_vel = sqrt(dist/max);
+  double base_vel = 0*sqrt(dist/max);
   
   double x_vel = -base_vel * cos(theta);
   double y_vel = base_vel * sin(theta);

@@ -19,7 +19,7 @@
 
 //Change this if you want to use a different big G
 #ifdef UNIT_MASS
-#define BIG_G (1.0)
+#define BIG_G (10000)
 #else
 #define BIG_G (6.67e-11)
 #endif
