@@ -22,7 +22,7 @@
 
 
 void update_system(System *sys) {
-  if (!sys->tree.initialized) {
+  if (sys->tree.nodes == NULL) {
     sys->tree = build_tree(sys->bodies, sys->count);
   } else {
     update_tree(&sys->tree);
@@ -144,7 +144,7 @@ static Body random_body(gsl_rng *r, double max) {
   
   double x = dist * sin(theta);
   double y = dist * cos(theta);
-  double z = max * gsl_rng_uniform(r);
+  double z = 0.0;
   
   vec3 pos = (vec3){x, y, z};
   
@@ -153,7 +153,8 @@ static Body random_body(gsl_rng *r, double max) {
   double x_vel = -base_vel * cos(theta);
   double y_vel = base_vel * sin(theta);
   
-  vec3 vel = (vec3){x_vel, y_vel, 0.0};
+  vec3 vel = (vec3){x_vel, y_vel
+    , 0.0};
   
   Body b = {};
   
@@ -184,4 +185,5 @@ System *random_disk(double max, uint count) {
   initialize_threads(s);
   return s;
 }
+
 

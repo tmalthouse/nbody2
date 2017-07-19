@@ -10,6 +10,7 @@
 #define config_h
 #include <math.h>
 
+
 //The number of threads to spawn. Ideally, should match your number of procs.
 #define THREAD_COUNT (4)
 
@@ -31,7 +32,7 @@
 
 #define TOL_PARAM (1.0)
 
-#define NODE_OPEN_PARAM (1.0)
+#define NODE_OPEN_PARAM (5)
 
 #define INITIAL_NODE_BUFFER (256)
 

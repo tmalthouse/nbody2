@@ -271,8 +271,11 @@ void testDrawTri() {
   CameraState cam;
   cam.aspectRatio = c.screensize.x/c.screensize.y;
   
+  time_t begin, end;
   
+
   while(1) {
+    begin = clock();
     update_system(s);
     //float r = randf()/2, g = randf()/2, b = randf()/2;
     float r=0,g=0,b=0;
@@ -287,7 +290,9 @@ void testDrawTri() {
     
     total_force_calcs = 0;
     
-    event_handler(  s, &cam, c);
+    event_handler(s, &cam, c);
+    end = clock();
+    printf("Time for update: %ld ms\n", (end-begin)*1000/CLOCKS_PER_SEC);
     
     
     //print_tree(&s.tree);

@@ -50,7 +50,6 @@ struct _tree_node {
   vec3 ctr_mass;
   
   uint capacity;
-  bool initialized;
   bool resized;
 };
 

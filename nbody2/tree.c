@@ -13,6 +13,7 @@
 #include <math.h>
 #include <float.h>
 #include <assert.h>
+#include <signal.h>
 #include "vec3.h"
 #include "tree.h"
 #include "body.h"
@@ -71,7 +72,8 @@ static inline vec3 node_min_point(vec3 min, vec3 div, uint8_t index) {
 
 
 static inline vec3 center_of_mass(TreeNode *node) {
-  vec3 cmass = vec3_0;
+  vec3 cmass = node->divs;
+  if (node->mass == 0) return cmass;
   
   for (uint i=0; i<node->nbodies; i++) {
 #ifdef UNIT_MASS
@@ -85,21 +87,12 @@ static inline vec3 center_of_mass(TreeNode *node) {
   return cmass;
 }
 
-static void update_node(TreeNode *node) {
-  if (node->level == 0) {
-    double max_pt = max_point(*node->bodies, node->nbodies);
-    if (2*max_pt > node->max.x) {
-      assert(max_pt > 0);
-      node->max = (vec3)(10*max_pt);
-      node->min = -node->max;
-      node->resized = true;
-      printf("Resizing tree! New max is %f\n", max_pt);
-    }
-  }
-  
-  
+
+static void update_node (TreeNode *node) {
+  //If its children are not already allocated, allocate them.
   if (node->nodes == NULL) {
-    node->nodes = calloc(8, sizeof(TreeNode));
+    node->nodes = calloc(sizeof(TreeNode), 8);
+    //And initialize them
     for (uint i=0; i<8; i++) {
       TreeNode *child_node = &node->nodes[i];
       //This triggers calculation of bounds
@@ -109,7 +102,6 @@ static void update_node(TreeNode *node) {
       child_node->capacity = node->nbodies;
       child_node->nbodies = 0;
       child_node->level = node->level+1;
-      child_node->initialized = true;
     }
   }
   
@@ -124,34 +116,28 @@ static void update_node(TreeNode *node) {
     }
   }
   
-  //Clear the body buffers
+  //Clear the body buffer for each node
   for (uint i=0; i<8; i++) {
-    if (node->nodes[i].initialized) {
-      node->nodes[i].nbodies = 0;
-      node->nodes[i].mass = 0;
-    }
+    TreeNode *child = &node->nodes[i];
+    child->mass = 0.0;
+    child->nbodies = 0.0;
   }
   
   for (uint i=0; i<node->nbodies; i++) {
-    vec3 tpos = node->bodies[i]->pos;
-    vec3 tdivs = node->divs;
+    uint8_t index = coord_to_index(node->bodies[i]->pos, node->divs);
+    TreeNode *child = &node->nodes[index];
     
-    
-    uint8_t index = coord_to_index(tpos, tdivs);
-    TreeNode *child_node = &node->nodes[index];
-
     //If the body ptr buffer is at capacity, double its size
-    if (child_node->nbodies == child_node->capacity) {
-      child_node->bodies = realloc(child_node->bodies, (2*sizeof(Body*)*child_node->capacity));
-      child_node->capacity *= 2;
+    if (child->nbodies && child->nbodies == child->capacity) {
+      child->bodies = realloc(child->bodies, (2*sizeof(Body*)*child->capacity));
+      child->capacity *= 2;
     }
-    
-    child_node->bodies[child_node->nbodies] = node->bodies[i];
-    child_node->nbodies++;
+    child->bodies[child->nbodies] = node->bodies[i];
+    child->nbodies++;
 #ifdef UNIT_MASS
-    child_node->mass++;
+    child->mass++;
 #else
-    child_node->mass += node->bodies[i]->mass;
+    child->mass += node->bodies[i]->mass;
 #endif
   }
   
@@ -159,19 +145,24 @@ static void update_node(TreeNode *node) {
   for (uint i=0; i<8; i++) {
     //But first, calculate the centers of mass
     node->nodes[i].ctr_mass = center_of_mass(&node->nodes[i]);
+    if (isnan(node->nodes[i].ctr_mass.x)) raise(SIGFPE);
     
     if (node->nodes[i].nbodies > 1) {
       update_node(&node->nodes[i]);
     }
   }
-  
 }
 
 void update_tree(TreeNode *node) {
+  double max_pt = max_point(*node->bodies, node->nbodies);
+  if (2*max_pt > node->max.x) {
+    assert(max_pt > 0);
+    node->max = (vec3)(10*max_pt);
+    node->min = -node->max;
+    node->resized = true;
+    printf("Resizing tree! New max is %f\n", max_pt);
+  }
   update_node(node);
-  FILE *f = fopen("/Users/Thomas/Desktop/out.txt", "w");
-  print_tree(node, f);
-  fclose(f);
 }
 
 TreeNode build_tree(Body *bodies, uint count) {
@@ -184,7 +175,6 @@ TreeNode build_tree(Body *bodies, uint count) {
   node.divs = vec3_0;
   node.max = 10*max_point_vec(bodies, count);
   node.min = -node.max;
-  node.initialized = true;
   node.nodes = NULL;
   node.level = 0;
 
@@ -198,7 +188,7 @@ TreeNode build_tree(Body *bodies, uint count) {
 
 void free_node(TreeNode *node) {
   for (uint i=0; i<8; i++) {
-    if (node->nodes && node->nodes[i].initialized) {
+    if (node->nodes && node->nodes[i].nodes) {
       free_node(&node->nodes[i]);
     }
   }
@@ -208,6 +198,7 @@ void free_node(TreeNode *node) {
   
   node->nodes = NULL;
   node->bodies = NULL;
+  node->capacity = 0;
 }
 
 //From http://www.cita.utoronto.ca/~dubinski/treecode/node4.html
@@ -239,7 +230,7 @@ void _print_tree(TreeNode *node, FILE *f) {
   char preamble[512] = {};
   
   //Don't print if the node is empty
-  if (node->nbodies == 0) {return;};
+  //if (node->nbodies == 0) {return;};
   
   for (uint i=0; i<node->level; i++) {
     strcat(preamble, levsep);

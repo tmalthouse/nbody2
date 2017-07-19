@@ -8,6 +8,7 @@
 
 #include <stdio.h>
 #include <stdbool.h>
+#include <fenv.h>
 #include "system.h"
 #include "types.h"
 #include "viewer/viewer.h"
@@ -16,6 +17,7 @@
 #define TESTS 0
 
 int main(int argc, const char * argv[]) {
+  
 #if TESTS
   runtests(true);
 #else
