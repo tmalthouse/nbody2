@@ -53,7 +53,7 @@ mat4 rotation_matrix(float x, float y, float z) {
   mat4 y_mat = new_mat4((float[]){
     cos(y),  0.0f, sin(y), 0.0f,
     0.0f,    1.0f, 0.0f,   0.0f,
-    -sin(y), 0.0f, cos(x), 0.0f,
+    -sin(y), 0.0f, cos(y), 0.0f,
     0.0f,    0.0f, 0.0f,   1.0f
   });
   

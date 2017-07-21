@@ -40,7 +40,7 @@ typedef struct {
   double aspectRatio;
 } CameraState;
 
-void testDrawTri();
+void run_simulation();
 
 
 

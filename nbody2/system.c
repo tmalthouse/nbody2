@@ -151,13 +151,12 @@ static Body random_body(gsl_rng *r, double max) {
   
   vec3 pos = (vec3){x, y, z};
   
-  double base_vel = 0*sqrt(dist/max);
+  double base_vel = sqrt(dist/max);
   
   double x_vel = -base_vel * cos(theta);
   double y_vel = base_vel * sin(theta);
   
-  vec3 vel = (vec3){x_vel, y_vel
-    , 0.0};
+  vec3 vel = (vec3){x_vel, y_vel, 0.0};
   
   Body b = {};
   

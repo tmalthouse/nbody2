@@ -20,6 +20,6 @@ int main(int argc, const char * argv[]) {
 #if TESTS
   runtests(true);
 #else
-  testDrawTri();
+  run_simulation();
 #endif
 }

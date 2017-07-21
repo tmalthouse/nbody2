@@ -8,6 +8,7 @@
 
 #include "calculationthread.h"
 #include "body.h"
+#include <signal.h>
 
 int thread_loop(void *info) {
   CalculationThread *self = (CalculationThread*)info;
@@ -23,6 +24,6 @@ int thread_loop(void *info) {
     }
   } while (true);
   
-  //Should never reach here?
+  //Should never reach here? Ever?
   return -1;
 }

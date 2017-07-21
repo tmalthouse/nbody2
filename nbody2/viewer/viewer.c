@@ -87,7 +87,7 @@ int load_shader (GLuint *shader, char *path, GLenum shader_type) {
   rewind(sh);
   char *shader_buf = NULL;
   if (size > 0) {
-    shader_buf = calloc(1, size+1);
+    shader_buf = malloc(size+1);
   } else {
     goto err;
   }
@@ -259,7 +259,7 @@ void event_handler(System *s, CameraState *cam, SDL2Context c) {
     }
 }
 
-void testDrawTri() {
+void run_simulation() {
   srand((int)time(NULL));
   SDL2Context c = new_SDL2Context(SDL_INIT_VIDEO);
   System *s = random_disk(1e6, 1000);
