@@ -12,6 +12,7 @@
 #include "vec3.h"
 #include "c11threads.h"
 #include <stdbool.h>
+#include <sys/types.h>
 
 typedef enum {
   GAS_BODY,

@@ -9,7 +9,8 @@
 #include "test_vec3.h"
 #include <time.h>
 #include <stdlib.h>
-#ifndef APPLE
+#include <sys/types.h>
+#ifndef __APPLE__
 #include <bsd/stdlib.h>
 #endif
 

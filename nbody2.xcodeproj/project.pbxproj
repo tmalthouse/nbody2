@@ -410,7 +410,11 @@
 					/usr/local/Cellar/gsl/2.2.1/lib,
 					/usr/local/lib,
 				);
-				OTHER_CFLAGS = "";
+				OTHER_CFLAGS = (
+					"-O1",
+					"-march=native",
+					"-g",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;

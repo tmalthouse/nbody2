@@ -10,6 +10,7 @@
 #define mat4_h
 
 #include <stdio.h>
+#include "../types.h"
 
 typedef float vec4 __attribute__((ext_vector_type(4)));
 

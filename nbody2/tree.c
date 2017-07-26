@@ -35,16 +35,27 @@ void sum_mass(TreeNode *node) {
 #endif
 }
 
-double max_point(Body *bodies, uint count) {
-  double max = 0;
-  for (uint64_t i=0; i<count; i++) {
+
+
+double max_point (Body *bodies, uint count) {
+  double max = 0.0;
+  
+  for (uint i=0; i<count; i++) {
     vec3 pos = bodies[i].pos;
     
-    if (fabs(pos.x)>max) max = fabs(pos.x);
-    if (fabs(pos.y)>max) max = fabs(pos.y);
-    if (fabs(pos.z)>max) max = fabs(pos.z);
+    double x_abs = fabs(pos.x);
+    if (max<x_abs) max = x_abs;
+    
+    double y_abs = fabs(pos.y);
+    if (max<y_abs) max = y_abs;
+    
+    double z_abs = fabs(pos.z);
+    if (max<z_abs) max = z_abs;
+    
+    //assert (isnormal(max));
+    if (!isnormal(max)) printf("%d\n", i);
+    assert (max > 0.0);
   }
-  assert (max >= 0);
   
   return max;
 }

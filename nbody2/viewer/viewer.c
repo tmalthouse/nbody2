@@ -265,6 +265,7 @@ void run_simulation() {
   System *s = random_disk(1e6, 1000);
   //System s = load_tispy("/Users/Thomas/Downloads/IsolatedCollapse.000000");
   s->tree = build_tree(s->bodies, s->count);
+
   
   init_shaders(&c);
   
@@ -328,7 +329,7 @@ mat4 create_mvp_matrix(CameraState cam, double max_dist);
 void draw_bodies (SDL2Context c, CameraState *cam, Body *bodies, uint count) {
   check_gl_error();
 
-  mat4 mvp = create_mvp_matrix(*cam, max_point(bodies, count));
+  mat4 mvp = create_mvp_matrix(*cam, 1/*max_point(bodies, count)*/);
   //print_mat4(mvp);
   glUniformMatrix4fv(c.MVP_uni, 1, GL_FALSE, (float*)&mvp);
 

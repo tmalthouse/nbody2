@@ -9,6 +9,10 @@
 #ifndef config_h
 #define config_h
 #include <math.h>
+#include <SDL2/SDL_assert.h>
+
+#undef assert
+#define assert(v) SDL_assert_release(v)
 
 
 //The number of threads to spawn. Ideally, should match your number of procs.
@@ -39,9 +43,5 @@
 #define SHADER_DIR "/Users/Thomas/Documents/xcode/nbody2/nbody2/viewer/shaders"
 
 #define CONTROL_SENSITIVITY (M_PI/90.0)
-
-#ifndef __APPLE__
-typedef unsigned int uint;
-#endif
 
 #endif /* config_h */

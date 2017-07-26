@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <tgmath.h>
 #include <stdbool.h>
+#include <signal.h>
 
 typedef double vec3 __attribute__((ext_vector_type(3)));
 
@@ -26,14 +27,16 @@ typedef double vec3 __attribute__((ext_vector_type(3)));
 #define vec3_condense_bool(v) (v.x && v.y && v.z)
 
 static inline float fastinvsqrt(float f) {
-  float result;
+  /*float result;
   asm ("rsqrtss %[output], %[base] \n"  : [output] "=x" (result) : [base] "x" (f));
   result = result * (1.5f - (f * 0.5 * result * result));
-  return result;
+  if (isnan(result)) raise(SIGINT);
+  return result;*/
+  return 1/sqrt(f);
 }
 
 static inline float fastsqrt(float f) {
-  return f * fastinvsqrt(f);
+  return sqrt(f);
 }
 
 static inline double vabs (vec3 v) {return (double)fastsqrt((float)v.x*v.x + v.y*v.y + v.z*v.z);}
