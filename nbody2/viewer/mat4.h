@@ -10,6 +10,7 @@
 #define mat4_h
 
 #include <stdio.h>
+#include <string.h>
 #include "../types.h"
 
 typedef float vec4 __attribute__((ext_vector_type(4)));
@@ -26,12 +27,17 @@ static inline vec4 mat4_col(mat4 m, uint col) {
   return m.elem[col];
 }
 
+static inline bool mat4_eq(mat4 a, mat4 b) {
+  return !memcmp(&a, &b, sizeof(mat4));
+}
+
 mat4 mat4_mult(mat4 a, mat4 b);
 
 static inline float vec4_sum(vec4 v) {
   return v.x+v.y+v.z+v.w;
 }
 
+mat4 new_mat4(float *elems);
 mat4 rotation_matrix(float x, float y, float z);
 mat4 translation_matrix(float x, float y, float z);
 mat4 scale_matrix(float x, float y, float z);

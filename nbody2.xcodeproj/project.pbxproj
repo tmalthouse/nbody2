@@ -69,6 +69,8 @@
 		E9AD70B41EE7D1E900C74E69 /* tests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tests.h; path = tests/tests.h; sourceTree = "<group>"; };
 		E9BF22A21ED631AC006062C2 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		E9BF59081ED8D8A7000982E5 /* body_vertex_shader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = body_vertex_shader.glsl; path = viewer/shaders/body_vertex_shader.glsl; sourceTree = "<group>"; };
+		E9C5C06C1F295DFF007FADB2 /* test_mat4.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = test_mat4.c; path = tests/test_mat4.c; sourceTree = "<group>"; };
+		E9C5C06D1F295DFF007FADB2 /* test_mat4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = test_mat4.h; path = tests/test_mat4.h; sourceTree = "<group>"; };
 		E9D1B5F11F18349F008C955E /* c11threads.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = c11threads.h; sourceTree = "<group>"; };
 		E9D1B5F21F183675008C955E /* calculationthread.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = calculationthread.c; sourceTree = "<group>"; };
 		E9D1B5F31F183675008C955E /* calculationthread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = calculationthread.h; sourceTree = "<group>"; };
@@ -136,6 +138,8 @@
 			children = (
 				E9AD70AF1EE7D02300C74E69 /* test_vec3.c */,
 				E9AD70B01EE7D02300C74E69 /* test_vec3.h */,
+				E9C5C06C1F295DFF007FADB2 /* test_mat4.c */,
+				E9C5C06D1F295DFF007FADB2 /* test_mat4.h */,
 				E9AD70B31EE7D1E900C74E69 /* tests.c */,
 				E9AD70B41EE7D1E900C74E69 /* tests.h */,
 			);
@@ -410,11 +414,7 @@
 					/usr/local/Cellar/gsl/2.2.1/lib,
 					/usr/local/lib,
 				);
-				OTHER_CFLAGS = (
-					"-O1",
-					"-march=native",
-					"-g",
-				);
+				OTHER_CFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;

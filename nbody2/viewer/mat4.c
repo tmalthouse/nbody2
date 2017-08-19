@@ -31,7 +31,7 @@ mat4 mat4_transpose(mat4 a) {
   return res;
 }
 
-static inline mat4 new_mat4(float *elems) {
+mat4 new_mat4(float *elems) {
   if (elems==NULL) return (mat4){};
   else             return (mat4){.elem = {
     (vec4){elems[0], elems[4], elems[8], elems[12]},

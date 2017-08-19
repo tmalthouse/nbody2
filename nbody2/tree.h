@@ -34,4 +34,6 @@ void print_tree(TreeNode *node, FILE *f);
 
 void prune_tree(TreeNode *tree);
 
+vec3 node_cmass(TreeNode *node);
+
 #endif /* tree_h */

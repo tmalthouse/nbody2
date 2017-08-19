@@ -98,6 +98,8 @@ static inline vec3 center_of_mass(TreeNode *node) {
   return cmass;
 }
 
+vec3 node_cmass(TreeNode *node) {return center_of_mass(node);}
+
 
 static void update_node (TreeNode *node) {
   //If its children are not already allocated, allocate them.
@@ -236,6 +238,7 @@ void prune_tree(TreeNode *tree) {
 
 
 void _print_tree(TreeNode *node, FILE *f) {
+  
   char levsep[] = "\u2503\t";
   char preamble[512] = {};
   
@@ -253,7 +256,7 @@ void _print_tree(TreeNode *node, FILE *f) {
   } else {
     fprintf(f, "%s\u2523Node: addr: %p count: %d mass: %f, CoM: (%.2f, %.2f, %.2f)\n", preamble, node, node->nbodies, node->mass, vec3_to_triple(node->ctr_mass));
     for (uint i=0; i<8; i++) {
-      _print_tree(&node->nodes[i], f);
+      if (node->nodes[i].nodes != NULL) _print_tree(&node->nodes[i], f);
     }
   }
   

@@ -262,7 +262,7 @@ void event_handler(System *s, CameraState *cam, SDL2Context c) {
 void run_simulation() {
   srand((int)time(NULL));
   SDL2Context c = new_SDL2Context(SDL_INIT_VIDEO);
-  System *s = random_disk(1e6, 1000);
+  System *s = random_disk(1e4, 1000);
   //System s = load_tispy("/Users/Thomas/Downloads/IsolatedCollapse.000000");
   s->tree = build_tree(s->bodies, s->count);
 
@@ -293,7 +293,8 @@ void run_simulation() {
     
     event_handler(s, &cam, c);
     end = clock();
-    printf("Time for update: %ld ms\n", (end-begin)*1000/CLOCKS_PER_SEC);
+    //printf("Time for update: %ld ms\n", (end-begin)*1000/CLOCKS_PER_SEC);
+    printf("%f, %f, %f\n", vec3_to_triple(node_cmass(&s->tree)));
     
     
     //print_tree(&s.tree);
@@ -365,13 +366,13 @@ void _check_gl_error(const char *file, int line) {
 }
 
 mat4 create_mvp_matrix(CameraState cam, double max_dist) {
-  double scale_factor = 1/max_dist;
+
   
-  mat4 rot = rotation_matrix(cam.altitude, 0,cam.azimuth);
-  mat4 trans = translation_matrix(vec3_to_triple(-cam.camera_pos));
-  mat4 scale = scale_matrix(cam.aspectRatio, 1, 1);
+  mat4 model = rotation_matrix(cam.altitude, 0,cam.azimuth);
+  mat4 view = translation_matrix(vec3_to_triple(-cam.camera_pos));
+  mat4 pres = scale_matrix(cam.aspectRatio, 1, 1);
   
-  mat4 cumulative = mat4_mult(trans, mat4_mult(scale, rot));
+  mat4 cumulative = mat4_mult(pres, mat4_mult(view, model));
   
   return cumulative;
 }
