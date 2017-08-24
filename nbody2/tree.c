@@ -83,7 +83,7 @@ static inline vec3 node_min_point(vec3 min, vec3 div, uint8_t index) {
 
 
 static inline vec3 center_of_mass(TreeNode *node) {
-  vec3 cmass = node->divs;
+  vec3 cmass = vec3_0;
   if (node->mass == 0) return cmass;
   
   for (uint i=0; i<node->nbodies; i++) {
@@ -238,6 +238,7 @@ void prune_tree(TreeNode *tree) {
 
 
 void _print_tree(TreeNode *node, FILE *f) {
+  if (node->nbodies == 0) return;
   
   char levsep[] = "\u2503\t";
   char preamble[512] = {};
@@ -256,7 +257,7 @@ void _print_tree(TreeNode *node, FILE *f) {
   } else {
     fprintf(f, "%s\u2523Node: addr: %p count: %d mass: %f, CoM: (%.2f, %.2f, %.2f)\n", preamble, node, node->nbodies, node->mass, vec3_to_triple(node->ctr_mass));
     for (uint i=0; i<8; i++) {
-      if (node->nodes[i].nodes != NULL) _print_tree(&node->nodes[i], f);
+      _print_tree(&node->nodes[i], f);
     }
   }
   
